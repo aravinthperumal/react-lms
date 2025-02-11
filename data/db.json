@@ -1,0 +1,14 @@
+{
+    "users":[
+        {
+            "username":"admin",
+            "password":"admintest",
+            "role":"admin"
+        },
+        {
+            "username":"librarian",
+            "password":"librarytest",
+            "role":"user"
+        }
+    ]
+}

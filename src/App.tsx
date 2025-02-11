@@ -1,35 +1,27 @@
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
+import { Navigate, Route, Routes } from "react-router-dom";
 import "./App.css";
-import { useState } from "react";
+import { StudentList } from "./pages/StudentList/StudentList";
+import { BookList } from "./pages/BookList/BookList";
+import { Login } from "./pages/Login/Login";
+import { BookReturnEntry } from "./pages/BookReturnEntry/BookReturnEntry";
+import { BookTakenEntry } from "./pages/BookTakenEntry/BookTakenEntry";
+import { FunctionComponent } from "react";
 
-function App() {
-  const [count, setCount] = useState(0);
-
+export const App:FunctionComponent=()=> {
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <Routes>
+        {/*need to implement route protection with auth*/}
+        <Route path="/" element={<Navigate to={'/login'}/>}/>
+        <Route path="/login" element={<Login/>}/>
+        <Route path="/student-list" element={<StudentList/>}/>
+        <Route path="/book-list" element={<BookList/>}/>
+        <Route path="/book-return-entry" element={<BookReturnEntry/>}/>
+        <Route path="/book-taken-entry" element={<BookTakenEntry/>}/>
+      </Routes>
     </>
   );
 }
 
 export default App;
+ 
