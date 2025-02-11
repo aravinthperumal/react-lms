@@ -1,10 +1,10 @@
-import { render} from '@testing-library/react';
-import App from './App';
+import { render } from "@testing-library/react";
+import App from "./App";
 
-describe('App Test',()=>{
-    it('Render App',()=>{
-        const {getByRole} = render(<App/>);
+describe("App Test", () => {
+  it("Render App", () => {
+    const { getByRole } = render(<App />);
 
-        expect(getByRole('button')).toBeInTheDocument();
-    })
-})
+    expect(getByRole("button")).toBeInTheDocument();
+  });
+});

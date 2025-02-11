@@ -1,0 +1,8 @@
+.vscode/settings.json
+dist/
+docs/
+index.html
+public/assets/
+public/**/*.html
+README.md
+tsconfig.json
