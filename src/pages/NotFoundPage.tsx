@@ -1,6 +1,3 @@
-
-export const NotFoundPage = () => {
-  return (
-    <div>NotFoundPage</div>
-  )
-}
+export const NotFoundPage: React.FC = () => {
+  return <div>NotFoundPage</div>;
+};

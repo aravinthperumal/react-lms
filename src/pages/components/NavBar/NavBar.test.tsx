@@ -1,14 +1,17 @@
-import { render } from "@testing-library/react";
+import { BrowserRouter } from "react-router-dom";
 import { NavBar } from "./NavBar";
-import { BrowserRouter } from "react-router";
+import { render, screen } from "@testing-library/react";
 
-describe("Nab bar test", () => {
-  it("render", () => {
-    render(
-      <BrowserRouter>
-        <NavBar />
-      </BrowserRouter>,
-    );
+describe("NavBar", () => {
+  it("render the navbar correctly", () => {
+    render(<NavBar />, {
+      wrapper: BrowserRouter,
+    });
+    expect(screen.getByText("Library Management")).toBeInTheDocument();
+    expect(screen.getByText("Student List")).toBeInTheDocument();
+    expect(screen.getByText("Book List")).toBeInTheDocument();
+    expect(screen.getByText("Book Taken Entry")).toBeInTheDocument();
+    expect(screen.getByText("Book Return Entry")).toBeInTheDocument();
+    expect(screen.getByText("Logout")).toBeInTheDocument();
   });
 });
-

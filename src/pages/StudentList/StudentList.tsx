@@ -1,5 +1,7 @@
-import { FunctionComponent } from "react";
-
-export const StudentList: FunctionComponent=()=>{
-    return <><h2>Student Lists</h2></>
-}
+export const StudentList: React.FC = () => {
+  return (
+    <>
+      <h2>Student Lists</h2>
+    </>
+  );
+};

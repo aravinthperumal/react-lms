@@ -1,7 +1,7 @@
-import  { FunctionComponent } from 'react'
-
-export const BookReturnEntry:FunctionComponent = () => {
+export const BookReturnEntry: React.FC = () => {
   return (
-    <><h2>BookReturnEntry</h2></>
-  )
-}
+    <>
+      <h2>BookReturnEntry</h2>
+    </>
+  );
+};

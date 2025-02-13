@@ -1,4 +1,4 @@
-import { FunctionComponent, useCallback, useState } from "react";
+import { useCallback, useState } from "react";
 import {
   LogOutButton,
   StyledHamburger,
@@ -8,10 +8,16 @@ import {
   StyledNavBar,
 } from "./NavBar.sc";
 import { useNavigate } from "react-router";
+import { menuItems } from "./menuItems";
 
-export const NavBar: FunctionComponent = () => {
+export const NavBar: React.FC = () => {
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
+
+  const toggleMenu = useCallback(
+    () => setIsOpen((prevState) => !prevState),
+    [],
+  );
 
   const onLogOut = useCallback(() => {
     navigate("/login");
@@ -19,21 +25,19 @@ export const NavBar: FunctionComponent = () => {
 
   return (
     <StyledNavBar>
-      <StyledLogo href="">Library Management</StyledLogo>
-      <StyledHamburger onClick={() => setIsOpen(!isOpen)}>
+      <StyledLogo>Library Management</StyledLogo>
+      <StyledHamburger onClick={toggleMenu}>
         <span />
         <span />
         <span />
       </StyledHamburger>
-      <StyledMenu isOpen={isOpen}>
-        <StyledMenuLink to={"/student-list"}>Student List</StyledMenuLink>
-        <StyledMenuLink to={"/book-list"}>Book List</StyledMenuLink>
-        <StyledMenuLink to={"/book-taken-entry"}>
-          Book Taken Entry
-        </StyledMenuLink>
-        <StyledMenuLink to={"/book-return-entry"}>
-          Book Return Entry
-        </StyledMenuLink>
+      <StyledMenu $isOpen={isOpen}>
+        {menuItems.map((item) => (
+          <StyledMenuLink key={item.path} to={item.path}>
+            {item.label}
+          </StyledMenuLink>
+        ))}
+
         <LogOutButton onClick={onLogOut}>Logout</LogOutButton>
       </StyledMenu>
     </StyledNavBar>
