@@ -88,7 +88,7 @@ export const StyledMenu = styled.div<StyledMenuProps>`
   position: relative;
 
   @media (max-width: 768px) {
-    overflow: hidden;
+    overflow: auto;
     flex-direction: column;
     max-height: ${(props): string => (props.$isOpen ? "300px" : "0")};
     transition: max-height 0.3s ease-in;

@@ -7,8 +7,11 @@ export default {
   moduleNameMapper: {
     "\\.(css|less|sass|scss)$": "identity-obj-proxy",
     "^.+\\.svg$": "jest-transformer-svg",
+    "^components/(.*)$": "<rootDir>/src/components/$1",
+    "^pages/(.*)$": "<rootDir>/src/pages/$1",
+    "^globals/(.*)$": "<rootDir>/src/globals/$1",
+    "^utils/(.*)$": "<rootDir>/src/utils/$1",
   },
-
   setupFilesAfterEnv: ["<rootDir>/jest.setup.ts"],
   collectCoverage: true,
   coverageThreshold: {

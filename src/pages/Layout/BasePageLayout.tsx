@@ -1,11 +1,14 @@
-import { NavBar } from "pages/components/NavBar/NavBar";
+import { NavBar } from "pages/components/navBar/NavBar";
 import { Outlet } from "react-router";
+import { StyledBasePageLayout } from "./BasePageLayout.sc";
 
 export const BasePageLayout: React.FC = () => {
   return (
     <>
       <NavBar />
-      <Outlet />
+      <StyledBasePageLayout>
+        <Outlet />
+      </StyledBasePageLayout>
     </>
   );
 };

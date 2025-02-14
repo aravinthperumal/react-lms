@@ -46,3 +46,8 @@ export const SubmitButton = styled.button`
     background-color: #c1c1c1;
   }
 `;
+
+export const ErrorText = styled.span`
+  color: red;
+  margin-top: 10px;
+`;

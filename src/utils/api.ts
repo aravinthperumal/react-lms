@@ -1,7 +1,17 @@
 import axios from "axios";
+import { User } from "./types";
+import { baseURL } from "globals/server";
 
-const api = axios.create({
-  baseURL: import.meta.env.BASE_URL,
-});
+export const fetchUserData = async (
+  username: string,
+  password: string,
+): Promise<User> => {
+  const response = await axios.get(`${baseURL}/users`, {
+    params: {
+      username,
+      password,
+    },
+  });
 
-export default api;
+  return response.data[0] as User;
+};

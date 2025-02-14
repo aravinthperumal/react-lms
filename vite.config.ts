@@ -1,7 +1,6 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 
-// https://vite.dev/config/
 export default defineConfig({
   base: "/react-lms/",
   plugins: [react()],
@@ -9,6 +8,8 @@ export default defineConfig({
     alias: {
       components: "/src/components",
       pages: "/src/pages",
+      globals: "/src/globals",
+      utils: "/src/utils",
     },
   },
 });

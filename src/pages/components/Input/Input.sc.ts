@@ -7,6 +7,7 @@ export const StyledInput = styled.input`
   border-radius: 4px;
   background-color: "#fff";
   outline: none;
+  box-sizing: border-box;
   transition: border-color 0.3s ease;
 
   &::placeholder {

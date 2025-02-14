@@ -1,4 +1,5 @@
 import { useCallback, useState } from "react";
+import { useNavigate } from "react-router";
 import {
   LogOutButton,
   StyledHamburger,
@@ -7,8 +8,8 @@ import {
   StyledMenuLink,
   StyledNavBar,
 } from "./NavBar.sc";
-import { useNavigate } from "react-router";
 import { menuItems } from "./menuItems";
+import { LOCALSTORAGE_USER_ROLE } from "globals/constants";
 
 export const NavBar: React.FC = () => {
   const navigate = useNavigate();
@@ -20,7 +21,8 @@ export const NavBar: React.FC = () => {
   );
 
   const onLogOut = useCallback(() => {
-    navigate("/login");
+    localStorage.removeItem(LOCALSTORAGE_USER_ROLE);
+    navigate("/login", { replace: true });
   }, [navigate]);
 
   return (
