@@ -1,25 +1,135 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import Login from "./Login";
-import { BrowserRouter } from "react-router";
+import { MemoryRouter } from "react-router-dom";
+import * as api from "utils/api";
+import { useNavigate } from "react-router-dom";
+import { LOCALSTORAGE_USER_ROLE } from "globals/constants";
 
-test("render login", () => {
-  render(<Login />, { wrapper: BrowserRouter });
+jest.mock("utils/api", () => ({
+  fetchUserData: jest.fn(),
+}));
+jest.mock("react-router-dom", () => ({
+  ...jest.requireActual("react-router-dom"),
+  useNavigate: jest.fn(),
+}));
 
-  expect(screen.getByPlaceholderText("Username")).toBeInTheDocument();
-  expect(screen.getByPlaceholderText("Password")).toBeInTheDocument();
-});
+describe("Login Page", () => {
+  let setItemSpy: jest.SpyInstance;
+  const mockNavigate = jest.fn();
 
-test("enter invalid credential and get error message", async () => {
-  render(<Login />, { wrapper: BrowserRouter });
-
-  fireEvent.change(screen.getByPlaceholderText("Username"), {
-    target: { value: "test" },
+  beforeEach(() => {
+    jest.clearAllMocks();
+    setItemSpy = jest.spyOn(Storage.prototype, "setItem");
+    (useNavigate as jest.Mock).mockReturnValue(mockNavigate);
   });
-  fireEvent.change(screen.getByPlaceholderText("Password"), {
-    target: { value: "test" },
+
+  test("render login", () => {
+    render(
+      <MemoryRouter>
+        <Login />
+      </MemoryRouter>,
+    );
+    expect(screen.getByPlaceholderText("Username")).toBeInTheDocument();
+    expect(screen.getByPlaceholderText("Password")).toBeInTheDocument();
   });
 
-  fireEvent.click(screen.getByRole("button"));
+  test("enter invalid password length and password test login button disabled", async () => {
+    render(
+      <MemoryRouter>
+        <Login />
+      </MemoryRouter>,
+    );
 
-  expect(screen.getByRole("button")).toBeInTheDocument();
+    fireEvent.change(screen.getByPlaceholderText(/username/i), {
+      target: { value: "test" },
+    });
+    fireEvent.change(screen.getByPlaceholderText(/password/i), {
+      target: { value: "test" },
+    });
+
+    const loginButton = screen.getByRole("button");
+    expect(loginButton).toBeDisabled();
+  });
+
+  test("enter valid password length username and password test login button enabled", async () => {
+    render(
+      <MemoryRouter>
+        <Login />
+      </MemoryRouter>,
+    );
+
+    fireEvent.change(screen.getByPlaceholderText(/username/i), {
+      target: { value: "test" },
+    });
+    fireEvent.change(screen.getByPlaceholderText(/password/i), {
+      target: { value: "testpassword" },
+    });
+
+    const loginButton = screen.getByRole("button");
+    expect(loginButton).toBeEnabled();
+  });
+
+  test("should give error when invalid input is provided", async () => {
+    (api.fetchUserData as jest.Mock).mockResolvedValueOnce(null);
+
+    render(
+      <MemoryRouter>
+        <Login />
+      </MemoryRouter>,
+    );
+
+    fireEvent.change(screen.getByPlaceholderText(/username/i), {
+      target: { value: "invalidUser" },
+    });
+    fireEvent.change(screen.getByPlaceholderText(/password/i), {
+      target: { value: "wrongPassword" },
+    });
+
+    const loginButton = screen.getByRole("button");
+
+    expect(loginButton).toBeEnabled();
+
+    fireEvent.click(loginButton);
+
+    await waitFor(() => {
+      expect(api.fetchUserData).toHaveBeenCalledWith(
+        "invalidUser",
+        "wrongPassword",
+      );
+      expect(setItemSpy).not.toHaveBeenCalled();
+      expect(mockNavigate).not.toHaveBeenCalled();
+      expect(
+        screen.getByText(/invalid username \/ password/i),
+      ).toBeInTheDocument();
+    });
+  });
+
+  test("should login with api when valid input is provided", async () => {
+    (api.fetchUserData as jest.Mock).mockResolvedValueOnce({ role: "admin" });
+
+    render(
+      <MemoryRouter>
+        <Login />
+      </MemoryRouter>,
+    );
+
+    fireEvent.change(screen.getByPlaceholderText(/username/i), {
+      target: { value: "admin" },
+    });
+    fireEvent.change(screen.getByPlaceholderText(/password/i), {
+      target: { value: "admin123" },
+    });
+
+    const loginButton = screen.getByRole("button");
+
+    expect(screen.getByRole("button")).toBeEnabled();
+
+    fireEvent.click(loginButton);
+
+    await waitFor(() => {
+      expect(api.fetchUserData).toHaveBeenCalledWith("admin", "admin123");
+      expect(setItemSpy).toHaveBeenCalledWith(LOCALSTORAGE_USER_ROLE, "admin");
+      // expect(mockNavigate).toHaveBeenCalledWith("/", { replace: true });
+    });
+  });
 });

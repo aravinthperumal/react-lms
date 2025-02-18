@@ -1,1 +1,1 @@
-export const NAVBAR_HEIGHT_OFFSET = "80";
+export const NAVBAR_HEIGHT_OFFSET = 80;
