@@ -22,7 +22,7 @@ export const StyledNavBar = styled.div`
 
 export const StyledLogo = styled.a`
   padding: 1rem 0;
-  color: rgb(233, 111, 41);
+  color: rgb(3, 12, 94);
   text-decoration: none;
   font-weight: 800;
   font-size: 1.7rem;
@@ -35,7 +35,7 @@ export const StyledLogo = styled.a`
 
 export const LogOutButton = styled.a`
   padding: 1rem 0;
-  color: rgb(233, 111, 41);
+  color: rgb(3, 12, 94);
   text-decoration: none;
   font-weight: 800;
   cursor: pointer;
@@ -50,7 +50,7 @@ export const StyledMenuLink = styled(NavLink)`
   cursor: pointer;
   text-align: center;
   text-decoration: none;
-  color: rgb(25, 42, 197);
+  color: rgb(3, 12, 94);
   transition: all 0.3s ease-in;
   font-size: 1.2rem;
   font-weight: bold;
@@ -58,7 +58,7 @@ export const StyledMenuLink = styled(NavLink)`
     color: rgb(30, 134, 231);
   }
   &:hover {
-    color: rgb(233, 111, 41);
+    color: rgb(7, 113, 212);
   }
 `;
 

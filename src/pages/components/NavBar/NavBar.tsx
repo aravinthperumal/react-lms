@@ -10,9 +10,12 @@ import {
 } from "./NavBar.sc";
 import { menuItems } from "./menuItems";
 import { LOCALSTORAGE_USER_ROLE } from "globals/constants";
+import { useDispatch } from "_state/useDispatch";
+import { setIsUserLoggedIn } from "pages/login/_state/userSlice";
 
 export const NavBar: React.FC = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleMenu = useCallback(
@@ -22,8 +25,9 @@ export const NavBar: React.FC = () => {
 
   const onLogOut = useCallback(() => {
     localStorage.removeItem(LOCALSTORAGE_USER_ROLE);
+    dispatch(setIsUserLoggedIn(false));
     navigate("/login", { replace: true });
-  }, [navigate]);
+  }, [dispatch, navigate]);
 
   return (
     <StyledNavBar>

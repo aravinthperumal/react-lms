@@ -2,7 +2,7 @@ import React from "react";
 import { StyledInput } from "./Input.sc";
 
 interface InputProps {
-  type?: "text" | "password";
+  type?: "text" | "password" | "email";
   placeholder?: string;
   value: string;
   name: string;

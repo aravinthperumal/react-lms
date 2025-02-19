@@ -2,13 +2,13 @@
   "users": [
     {
       "id": "1",
-      "username": "admin",
+      "username": "lmsadmin@gmail.com",
       "password": "admin123",
       "role": "admin"
     },
     {
       "id": "2",
-      "username": "librarian",
+      "username": "lmslibrarian@gmail.com",
       "password": "library123",
       "role": "staff"
     }

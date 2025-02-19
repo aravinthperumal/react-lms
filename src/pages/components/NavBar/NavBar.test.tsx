@@ -1,12 +1,14 @@
-import { BrowserRouter } from "react-router-dom";
+import { MemoryRouter } from "react-router-dom";
 import { NavBar } from "./NavBar";
-import { render, screen } from "@testing-library/react";
+import { render, screen } from "utils/test-utils";
 
 describe("NavBar", () => {
   it("render the navbar correctly", () => {
-    render(<NavBar />, {
-      wrapper: BrowserRouter,
-    });
+    render(
+      <MemoryRouter>
+        <NavBar />
+      </MemoryRouter>,
+    );
     expect(screen.getByText("Library Management")).toBeInTheDocument();
     expect(screen.getByText("Student List")).toBeInTheDocument();
     expect(screen.getByText("Book List")).toBeInTheDocument();

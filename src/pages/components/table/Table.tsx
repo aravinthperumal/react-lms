@@ -1,5 +1,6 @@
 import { useState } from "react";
 import {
+  NoDataWrapper,
   PaginationButton,
   PaginationContainer,
   StyledTable,
@@ -15,16 +16,16 @@ export interface Column<T> {
   render?: (row: T) => React.ReactNode;
 }
 
-interface Props<T> {
+interface TableProps<T> {
   rows: T[];
   columns: Column<T>[];
 }
 
-export default function Table<T>(props: Props<T>) {
+export default function Table<T>(props: TableProps<T>) {
   const { columns, rows } = props;
 
   const [currentPage, setCurrentPage] = useState(1);
-  const [rowsPerPage] = useState(2);
+  const [rowsPerPage] = useState(5);
 
   const totalPages = Math.ceil(rows.length / rowsPerPage);
 
@@ -58,40 +59,50 @@ export default function Table<T>(props: Props<T>) {
           </StyledTr>
         </thead>
         <StyledTbody>
-          {displayRows.map((row, index) => {
-            return (
-              <StyledTr tabIndex={-1} key={index}>
-                {columns.map((column, index) => {
-                  return (
-                    <StyledTd key={index}>
-                      {column.render
-                        ? column.render(row)
-                        : (row[column?.id] as string)}
-                    </StyledTd>
-                  );
-                })}
-              </StyledTr>
-            );
-          })}
+          {displayRows.length === 0 ? (
+            <StyledTr>
+              <StyledTd colSpan={columns.length}>
+                <NoDataWrapper>No Data Found</NoDataWrapper>
+              </StyledTd>
+            </StyledTr>
+          ) : (
+            displayRows.map((row, index) => {
+              return (
+                <StyledTr key={index}>
+                  {columns.map((column, index) => {
+                    return (
+                      <StyledTd key={index}>
+                        {column.render
+                          ? column.render(row)
+                          : (row[column?.id] as string)}
+                      </StyledTd>
+                    );
+                  })}
+                </StyledTr>
+              );
+            })
+          )}
         </StyledTbody>
       </StyledTable>
-      <PaginationContainer>
-        <PaginationButton
-          onClick={handlePreviousPage}
-          disabled={currentPage === 1}
-        >
-          Prev
-        </PaginationButton>
-        <span>
-          Page {currentPage} of {totalPages}
-        </span>
-        <PaginationButton
-          onClick={handleNextPage}
-          disabled={currentPage === totalPages}
-        >
-          Next
-        </PaginationButton>
-      </PaginationContainer>
+      {displayRows.length > 0 && (
+        <PaginationContainer>
+          <PaginationButton
+            onClick={handlePreviousPage}
+            disabled={currentPage === 1}
+          >
+            Prev
+          </PaginationButton>
+          <span>
+            Page {currentPage} of {totalPages}
+          </span>
+          <PaginationButton
+            onClick={handleNextPage}
+            disabled={currentPage === totalPages}
+          >
+            Next
+          </PaginationButton>
+        </PaginationContainer>
+      )}
     </>
   );
 }

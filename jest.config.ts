@@ -11,6 +11,7 @@ export default {
     "^pages/(.*)$": "<rootDir>/src/pages/$1",
     "^globals/(.*)$": "<rootDir>/src/globals/$1",
     "^utils/(.*)$": "<rootDir>/src/utils/$1",
+    "^_state/(.*)$": "<rootDir>/src/_state/$1",
   },
   setupFilesAfterEnv: ["<rootDir>/jest.setup.ts"],
   collectCoverage: true,

@@ -1,9 +1,10 @@
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { fireEvent, waitFor } from "@testing-library/react";
 import Login from "./Login";
 import { MemoryRouter } from "react-router-dom";
 import * as api from "utils/api";
 import { useNavigate } from "react-router-dom";
 import { LOCALSTORAGE_USER_ROLE } from "globals/constants";
+import { render, screen } from "utils/test-utils";
 
 jest.mock("utils/api", () => ({
   fetchUserData: jest.fn(),
@@ -59,7 +60,7 @@ describe("Login Page", () => {
     );
 
     fireEvent.change(screen.getByPlaceholderText(/username/i), {
-      target: { value: "test" },
+      target: { value: "admin@gmail.com" },
     });
     fireEvent.change(screen.getByPlaceholderText(/password/i), {
       target: { value: "testpassword" },
@@ -79,7 +80,7 @@ describe("Login Page", () => {
     );
 
     fireEvent.change(screen.getByPlaceholderText(/username/i), {
-      target: { value: "invalidUser" },
+      target: { value: "lmsadmin@gmail.com" },
     });
     fireEvent.change(screen.getByPlaceholderText(/password/i), {
       target: { value: "wrongPassword" },
@@ -93,7 +94,7 @@ describe("Login Page", () => {
 
     await waitFor(() => {
       expect(api.fetchUserData).toHaveBeenCalledWith(
-        "invalidUser",
+        "lmsadmin@gmail.com",
         "wrongPassword",
       );
       expect(setItemSpy).not.toHaveBeenCalled();
@@ -114,7 +115,7 @@ describe("Login Page", () => {
     );
 
     fireEvent.change(screen.getByPlaceholderText(/username/i), {
-      target: { value: "admin" },
+      target: { value: "lmsadmin@gmail.com" },
     });
     fireEvent.change(screen.getByPlaceholderText(/password/i), {
       target: { value: "admin123" },
@@ -127,7 +128,10 @@ describe("Login Page", () => {
     fireEvent.click(loginButton);
 
     await waitFor(() => {
-      expect(api.fetchUserData).toHaveBeenCalledWith("admin", "admin123");
+      expect(api.fetchUserData).toHaveBeenCalledWith(
+        "lmsadmin@gmail.com",
+        "admin123",
+      );
       expect(setItemSpy).toHaveBeenCalledWith(LOCALSTORAGE_USER_ROLE, "admin");
       // expect(mockNavigate).toHaveBeenCalledWith("/", { replace: true });
     });

@@ -9,7 +9,7 @@ export const StyledTable = styled.table`
 
 export const StyledTh = styled.th`
   padding: 12px;
-  background-color: rgb(243, 130, 64);
+  background-color: rgb(3, 12, 94);
   color: white;
   text-align: left;
   border: 1px solid #ddd;
@@ -25,7 +25,7 @@ export const StyledTd = styled.td`
 
 export const StyledTr = styled.tr`
   &:nth-child(even) {
-    background-color: #f2f2f2;
+    background-color: rgb(240, 230, 230);
   }
 
   &:hover {
@@ -35,14 +35,24 @@ export const StyledTr = styled.tr`
 
 export const PaginationContainer = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   margin-top: 10px;
+`;
+
+export const NoDataWrapper = styled.div`
+  text-align: center;
+  padding: 20px;
+  color: #666;
+  font-size: 16px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  margin-top: 20px;
 `;
 
 export const PaginationButton = styled.button`
   padding: 5px 10px;
   margin: 0 5px;
-  background-color: #4caf50;
+  background-color: rgb(10, 18, 95);
   color: white;
   border: none;
   cursor: pointer;
@@ -50,10 +60,6 @@ export const PaginationButton = styled.button`
 
   &:disabled {
     background-color: #ddd;
-  }
-
-  &:hover {
-    background-color: #45a049;
   }
 `;
 

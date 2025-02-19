@@ -10,6 +10,7 @@ export default defineConfig({
       pages: "/src/pages",
       globals: "/src/globals",
       utils: "/src/utils",
+      _state: "/src/_state",
     },
   },
 });

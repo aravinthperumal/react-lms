@@ -15,6 +15,7 @@ export const LoginContainer = styled.div`
   border-radius: 8px;
   box-shadow: 5px 5px 5px 5px rgba(26, 9, 121, 0.1);
   width: 100%;
+  border-bottom: solid 6px rgb(3, 12, 94);
   max-width: 400px;
   min-height: 400px;
 `;
@@ -22,14 +23,14 @@ export const LoginContainer = styled.div`
 export const LoginTitle = styled.h2`
   text-align: center;
   margin-bottom: 20px;
-  color: rgb(214, 81, 20);
+  color: rgb(3, 12, 94);
   font-weight: bold;
 `;
 
 export const SubmitButton = styled.button`
   width: 50%;
   padding: 10px;
-  background-color: rgb(39, 20, 214);
+  background-color: rgb(3, 12, 94);
   color: #fff;
   border: none;
   align-self: center;
@@ -39,11 +40,11 @@ export const SubmitButton = styled.button`
   transition: background-color 0.3s;
 
   &:hover {
-    background-color: rgb(224, 120, 50);
+    background-color: rgb(30, 134, 231);
   }
 
   &:disabled {
-    background-color: #c1c1c1;
+    background-color: rgb(148, 142, 142);
   }
 `;
 
