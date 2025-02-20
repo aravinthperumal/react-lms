@@ -1,5 +1,6 @@
 import { useState } from "react";
 import {
+  LoadingWrapper,
   NoDataWrapper,
   PaginationButton,
   PaginationContainer,
@@ -19,10 +20,11 @@ export interface Column<T> {
 interface TableProps<T> {
   rows: T[];
   columns: Column<T>[];
+  loading?: boolean;
 }
 
 export default function Table<T>(props: TableProps<T>) {
-  const { columns, rows } = props;
+  const { columns, rows, loading } = props;
 
   const [currentPage, setCurrentPage] = useState(1);
   const [rowsPerPage] = useState(5);
@@ -52,14 +54,18 @@ export default function Table<T>(props: TableProps<T>) {
         <thead>
           <StyledTr>
             {columns.map((column) => (
-              <StyledTh key={column.id as string}>
-                {column.render ? "" : column.label}
-              </StyledTh>
+              <StyledTh key={column.id as string}>{column.label}</StyledTh>
             ))}
           </StyledTr>
         </thead>
         <StyledTbody>
-          {displayRows.length === 0 ? (
+          {loading ? (
+            <StyledTr>
+              <StyledTd colSpan={columns.length}>
+                <LoadingWrapper>Loading...</LoadingWrapper>
+              </StyledTd>
+            </StyledTr>
+          ) : displayRows.length === 0 ? (
             <StyledTr>
               <StyledTd colSpan={columns.length}>
                 <NoDataWrapper>No Data Found</NoDataWrapper>

@@ -1,0 +1,31 @@
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { Book, BookState } from "./types";
+import axios from "axios";
+import { baseURL } from "globals/server";
+
+const initialState: BookState = {
+  bookList: [],
+  isLoading: false,
+};
+
+export const fetchBooks = createAsyncThunk("books/fetchAll", async () => {
+  const response = await axios.get<Book[]>(`${baseURL}/books`);
+  return response.data;
+});
+
+const bookSlice = createSlice({
+  initialState,
+  name: "userSlice",
+  reducers: {},
+  extraReducers: (builder) => {
+    builder.addCase(fetchBooks.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(fetchBooks.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.bookList = action.payload;
+    });
+  },
+});
+
+export const book = bookSlice.reducer;

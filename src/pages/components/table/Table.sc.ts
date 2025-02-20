@@ -63,4 +63,11 @@ export const PaginationButton = styled.button`
   }
 `;
 
+export const LoadingWrapper = styled.div`
+  text-align: center;
+  padding: 20px;
+  color: #666;
+  font-size: 16px;
+`;
+
 export const StyledTbody = styled.tbody``;

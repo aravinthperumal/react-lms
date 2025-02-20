@@ -12,5 +12,81 @@
       "password": "library123",
       "role": "staff"
     }
+  ],
+  "students": [
+    {
+      "id": "STD0001",
+      "name": "Akash",
+      "department": "ECE",
+      "booksBorrowed": ["LBOOK0003"]
+    },
+    {
+      "id": "STD0002",
+      "name": "Prakash",
+      "department": "EEE",
+      "booksBorrowed": ["LBOOK0003"]
+    },
+    {
+      "id": "STD0003",
+      "name": "Aravinth",
+      "department": "CSE",
+      "booksBorrowed": []
+    },
+    {
+      "id": "STD0004",
+      "name": "Kishore",
+      "department": "EEE",
+      "booksBorrowed": ["LBOOK0003", "LBOOK0002"]
+    },
+    {
+      "id": "STD0005",
+      "name": "leo",
+      "department": "CSE",
+      "booksBorrowed": ["LBOOK0002"]
+    },
+    {
+      "id": "STD0006",
+      "name": "leo",
+      "department": "CSE",
+      "booksBorrowed": ["LBOOK0001"]
+    }
+  ],
+  "books": [
+    {
+      "id": "LBOOK0001",
+      "title": "Introduction to Algorithms",
+      "author": "Thomas H. Cormen",
+      "category": "Computer Science",
+      "isbn": "9780262033848",
+      "totalCopies": 5,
+      "availableCopies": 3
+    },
+    {
+      "id": "LBOOK0002",
+      "title": "Clean Code",
+      "author": "Robert C. Martin",
+      "category": "Software Engineering",
+      "isbn": "9780132350884",
+      "totalCopies": 4,
+      "availableCopies": 2
+    },
+    {
+      "id": "LBOOK0003",
+      "title": "Mathematics for Computer Science",
+      "author": "Eric Lehman",
+      "category": "Mathematics",
+      "isbn": "9780134105101",
+      "totalCopies": 6,
+      "availableCopies": 6
+    },
+    {
+      "id": "LBOOK0004",
+      "title": "Electronics and communication",
+      "author": "Eric Lehman",
+      "category": "Electronics",
+      "isbn": "9780134105456",
+      "totalCopies": 6,
+      "availableCopies": 6
+    }
   ]
 }
