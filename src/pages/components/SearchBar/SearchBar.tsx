@@ -1,34 +1,83 @@
-import React, { useState } from "react";
-import { SearchButton, StyledSearchBarContainer } from "./SearchBar.sc";
+import React, { useCallback, useEffect, useState } from "react";
+import { Button, StyledSearchBarContainer } from "./SearchBar.sc";
 import Input from "../input/Input";
 import { EMPTY_VALUE } from "globals/constants";
+import { useLocation, useNavigate } from "react-router-dom";
+import { isEnterKey } from "utils/functions/keyboardFunctions";
 
-interface FilterDef {
+export interface FilterDef {
   key: string;
   placeholder: string;
 }
 
 interface SearchBarProps {
   filters: FilterDef[];
-  onSearch: (searchParams: Record<string, string>) => void;
 }
 
-const SearchBar: React.FC<SearchBarProps> = ({ filters, onSearch }) => {
-  const [filterParams, setFilterParams] = useState<Record<string, string>>({});
+const SearchBar: React.FC<SearchBarProps> = ({ filters }) => {
+  const [filterParams, setFilterParams] = useState<Record<string, string>>({}); //[{key:'value'}]
+  const navigate = useNavigate();
+  const location = useLocation();
 
-  const onChangeParam = (
-    event: React.ChangeEvent<HTMLInputElement>,
-    key: string,
-  ) => {
-    setFilterParams((prevParams) => ({
-      ...prevParams,
-      [key]: event.target.value,
-    }));
-  };
+  useEffect(() => {
+    const urlSearchParams = new URLSearchParams(location.search);
+    const filterParamsFromUrl: Record<string, string> = {};
+    filters.forEach((filter) => {
+      const value = urlSearchParams.get(filter.key);
+      if (value) {
+        filterParamsFromUrl[filter.key] = value;
+      }
+    });
+    setFilterParams(filterParamsFromUrl);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [location.search]); // this only need to be render for search parameter change
 
-  const handleSearchSubmit = () => {
-    onSearch(filterParams);
-  };
+  const onChangeParam = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>, key: string) => {
+      const value = event.target.value;
+      setFilterParams((prev) => {
+        // remove key if value is empty
+        if (!value) {
+          const newParams = { ...prev };
+          delete newParams[key];
+          return newParams;
+        }
+        return { ...prev, [key]: value };
+      });
+    },
+    [],
+  );
+
+  const handleSearch = useCallback(() => {
+    const queryParams = new URLSearchParams();
+    Object.entries(filterParams).forEach(([key, value]) => {
+      if (value) {
+        queryParams.set(key, value);
+      }
+    });
+    // navigate to same page with search query params updated
+    navigate(
+      {
+        pathname: location.pathname,
+        search: queryParams.toString(),
+      },
+      { replace: true },
+    );
+  }, [filterParams, location.pathname, navigate]);
+
+  const handleClear = useCallback(() => {
+    setFilterParams({});
+    navigate(location.pathname, { replace: true });
+  }, [location.pathname, navigate]);
+
+  const handleKeyDown = useCallback(
+    (event: React.KeyboardEvent) => {
+      if (isEnterKey(event)) {
+        handleSearch();
+      }
+    },
+    [handleSearch],
+  );
 
   return (
     <StyledSearchBarContainer>
@@ -39,10 +88,14 @@ const SearchBar: React.FC<SearchBarProps> = ({ filters, onSearch }) => {
           placeholder={filter.placeholder}
           onChange={(e) => onChangeParam(e, filter.key)}
           value={filterParams[filter.key] || EMPTY_VALUE}
+          onKeyDown={handleKeyDown}
         />
       ))}
 
-      <SearchButton onClick={handleSearchSubmit}>Search</SearchButton>
+      <Button onClick={handleSearch}>Search</Button>
+      {Object.keys(filterParams).length > 0 && (
+        <Button onClick={handleClear}>Clear</Button>
+      )}
     </StyledSearchBarContainer>
   );
 };

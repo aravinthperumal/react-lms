@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from "utils/test-utils";
+import { fireEvent, renderWithProviders, screen } from "utils/test-utils";
 import Table, { Column } from "./Table";
 
 interface TableData {
@@ -48,7 +48,7 @@ export const rows: TableData[] = [
 
 describe("Table Component", () => {
   it("renders table", () => {
-    render(<Table columns={columns} rows={rows} />);
+    renderWithProviders(<Table columns={columns} rows={rows} />);
     //table page size is 5
     rows.slice(0, 5).forEach((row) => {
       expect(screen.getByText(row.id.toString())).toBeInTheDocument();
@@ -57,12 +57,12 @@ describe("Table Component", () => {
   });
 
   it("display no data card with empty row array", () => {
-    render(<Table columns={columns} rows={[]} />);
+    renderWithProviders(<Table columns={columns} rows={[]} />);
     expect(screen.getByText("No Data Found")).toBeInTheDocument();
   });
 
   it("table with pagination", () => {
-    render(<Table columns={columns} rows={rows} />);
+    renderWithProviders(<Table columns={columns} rows={rows} />);
 
     expect(screen.getByText("Page 1 of 2")).toBeInTheDocument();
 

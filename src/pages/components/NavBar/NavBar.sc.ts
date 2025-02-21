@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 interface StyledMenuProps {
   //isOpen: boolean;
-  $isOpen: boolean; // Note the $ prefix to prevent the prop from being passed to DOM
+  $isOpen: boolean; // Note the $ prefix to prevent the prop from being passed to DOM https://styled-components.com/docs/api
 }
 
 export const StyledNavBar = styled.div`

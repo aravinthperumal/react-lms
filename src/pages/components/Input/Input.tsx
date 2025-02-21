@@ -1,5 +1,5 @@
-import React from "react";
-import { StyledInput } from "./Input.sc";
+import React, { KeyboardEvent } from "react";
+import { ErrorMessage, StyledInput } from "./Input.sc";
 
 interface InputProps {
   type?: "text" | "password" | "email";
@@ -7,6 +7,9 @@ interface InputProps {
   value: string;
   name: string;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onKeyDown?: (event: KeyboardEvent<HTMLInputElement>) => void;
+  hasError?: boolean;
+  errorMessage?: string;
 }
 
 const Input: React.FC<InputProps> = ({
@@ -15,6 +18,9 @@ const Input: React.FC<InputProps> = ({
   value,
   name,
   onChange,
+  hasError,
+  errorMessage,
+  onKeyDown,
 }) => {
   return (
     <div>
@@ -23,8 +29,11 @@ const Input: React.FC<InputProps> = ({
         placeholder={placeholder}
         value={value}
         name={name}
+        $hasError={hasError}
         onChange={onChange}
+        onKeyDown={onKeyDown}
       />
+      {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
     </div>
   );
 };

@@ -6,13 +6,14 @@ import { BookReturnEntry } from "./pages/bookReturnEntry/BookReturnEntry";
 import { BookTakenEntry } from "./pages/bookTakenEntry/BookTakenEntry";
 import { FunctionComponent } from "react";
 import Login from "pages/login/Login";
-import { NotFoundPage } from "pages/errorPage/NotFoundPage";
+import { NotFoundPage } from "pages/errorPage/Error404/NotFoundPage";
 import { Protected } from "pages/layout/Protected";
 
 export const App: FunctionComponent = () => {
   return (
     <>
       <Routes>
+        {/* always redirect to this page Protected wrapper will handle the authentication */}
         <Route path="/" element={<Navigate to={"/student-list"} />} />
         <Route path="/login" element={<Login />} />
         <Route element={<Protected />}>

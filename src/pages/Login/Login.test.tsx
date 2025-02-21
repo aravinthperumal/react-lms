@@ -1,10 +1,9 @@
 import { fireEvent, waitFor } from "@testing-library/react";
 import Login from "./Login";
-import { MemoryRouter } from "react-router-dom";
 import * as api from "utils/api";
 import { useNavigate } from "react-router-dom";
 import { LOCALSTORAGE_USER_ROLE } from "globals/constants";
-import { render, screen } from "utils/test-utils";
+import { renderWithProviders, screen } from "utils/test-utils";
 
 jest.mock("utils/api", () => ({
   fetchUserData: jest.fn(),
@@ -25,21 +24,13 @@ describe("Login Page", () => {
   });
 
   test("render login", () => {
-    render(
-      <MemoryRouter>
-        <Login />
-      </MemoryRouter>,
-    );
+    renderWithProviders(<Login />);
     expect(screen.getByPlaceholderText("Username")).toBeInTheDocument();
     expect(screen.getByPlaceholderText("Password")).toBeInTheDocument();
   });
 
   test("enter invalid password length and password test login button disabled", async () => {
-    render(
-      <MemoryRouter>
-        <Login />
-      </MemoryRouter>,
-    );
+    renderWithProviders(<Login />);
 
     fireEvent.change(screen.getByPlaceholderText(/username/i), {
       target: { value: "test" },
@@ -53,11 +44,7 @@ describe("Login Page", () => {
   });
 
   test("enter valid password length username and password test login button enabled", async () => {
-    render(
-      <MemoryRouter>
-        <Login />
-      </MemoryRouter>,
-    );
+    renderWithProviders(<Login />);
 
     fireEvent.change(screen.getByPlaceholderText(/username/i), {
       target: { value: "admin@gmail.com" },
@@ -73,11 +60,7 @@ describe("Login Page", () => {
   test("should give error when invalid input is provided", async () => {
     (api.fetchUserData as jest.Mock).mockResolvedValueOnce(null);
 
-    render(
-      <MemoryRouter>
-        <Login />
-      </MemoryRouter>,
-    );
+    renderWithProviders(<Login />);
 
     fireEvent.change(screen.getByPlaceholderText(/username/i), {
       target: { value: "lmsadmin@gmail.com" },
@@ -108,11 +91,7 @@ describe("Login Page", () => {
   test("should login with api when valid input is provided", async () => {
     (api.fetchUserData as jest.Mock).mockResolvedValueOnce({ role: "admin" });
 
-    render(
-      <MemoryRouter>
-        <Login />
-      </MemoryRouter>,
-    );
+    renderWithProviders(<Login />);
 
     fireEvent.change(screen.getByPlaceholderText(/username/i), {
       target: { value: "lmsadmin@gmail.com" },

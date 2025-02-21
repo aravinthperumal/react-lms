@@ -1,13 +1,10 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { LOCALSTORAGE_USER_ROLE } from "globals/constants";
-import { User } from "utils/types";
 
 interface InitialState {
-  user: User;
   isUserLoggedIn: boolean;
 }
 const initialState: InitialState = {
-  user: {} as User,
   isUserLoggedIn:
     localStorage.getItem(LOCALSTORAGE_USER_ROLE) !== null || false,
 };

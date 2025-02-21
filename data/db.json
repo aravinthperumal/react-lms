@@ -16,7 +16,7 @@
   "students": [
     {
       "id": "STD0001",
-      "name": "Akash",
+      "name": "Akash K",
       "department": "ECE",
       "booksBorrowed": ["LBOOK0003"]
     },

@@ -8,10 +8,13 @@ const initialState: BookState = {
   isLoading: false,
 };
 
-export const fetchBooks = createAsyncThunk("books/fetchAll", async () => {
-  const response = await axios.get<Book[]>(`${baseURL}/books`);
-  return response.data;
-});
+export const fetchBooks = createAsyncThunk(
+  "books/fetchAll",
+  async (params: Record<string, string>) => {
+    const response = await axios.get<Book[]>(`${baseURL}/books`, { params });
+    return response.data;
+  },
+);
 
 const bookSlice = createSlice({
   initialState,

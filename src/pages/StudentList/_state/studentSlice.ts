@@ -8,10 +8,15 @@ const initialState: StudentState = {
   isLoading: false,
 };
 
-export const fetchStudents = createAsyncThunk("students/fetchAll", async () => {
-  const response = await axios.get<Student[]>(`${baseURL}/students`);
-  return response.data;
-});
+export const fetchStudents = createAsyncThunk(
+  "students/fetchAll",
+  async (params: Record<string, string>) => {
+    const response = await axios.get<Student[]>(`${baseURL}/students`, {
+      params,
+    });
+    return response.data;
+  },
+);
 
 const studentSlice = createSlice({
   initialState,

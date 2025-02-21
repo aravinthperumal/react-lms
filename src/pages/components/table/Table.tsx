@@ -14,7 +14,7 @@ import {
 export interface Column<T> {
   id: keyof T;
   label: string;
-  render?: (row: T) => React.ReactNode;
+  render?: (row: T) => React.ReactNode; //custom cell renderer
 }
 
 interface TableProps<T> {
@@ -27,7 +27,7 @@ export default function Table<T>(props: TableProps<T>) {
   const { columns, rows, loading } = props;
 
   const [currentPage, setCurrentPage] = useState(1);
-  const [rowsPerPage] = useState(5);
+  const [rowsPerPage] = useState(5); //default page size
 
   const totalPages = Math.ceil(rows.length / rowsPerPage);
 

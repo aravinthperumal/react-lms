@@ -7,7 +7,7 @@ export const StyledSearchBarContainer = styled.div`
   margin-bottom: 20px;
 `;
 
-export const SearchButton = styled.button`
+export const Button = styled.button`
   padding: 10px 15px;
   background-color: rgb(83, 182, 240);
   color: white;
