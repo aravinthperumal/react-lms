@@ -4,12 +4,11 @@ import { StudentList } from "./pages/studentList/StudentList";
 import { BookList } from "./pages/bookList/BookList";
 import { BookReturnEntry } from "./pages/bookReturnEntry/BookReturnEntry";
 import { BookTakenEntry } from "./pages/bookTakenEntry/BookTakenEntry";
-import { FunctionComponent } from "react";
 import Login from "pages/login/Login";
 import { NotFoundPage } from "pages/errorPage/Error404/NotFoundPage";
 import { Protected } from "pages/layout/Protected";
 
-export const App: FunctionComponent = () => {
+export const App: React.FC = () => {
   return (
     <>
       <Routes>
