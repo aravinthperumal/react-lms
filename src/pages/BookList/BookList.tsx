@@ -1,7 +1,7 @@
 import { useDispatch } from "_state/useDispatch";
 import { useSelector } from "_state/useSelector";
 import Table from "pages/components/table/Table";
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import { fetchBooks } from "./_state/bookSlice";
 import { bookColumns } from "./tableColumns";
 import SearchBar, { FilterDef } from "pages/components/SearchBar/SearchBar";
@@ -20,13 +20,17 @@ export const BookList: React.FC = () => {
 
   const [searchParams] = useSearchParams();
 
-  useEffect(() => {
-    const searchParamsObj: Record<string, string> = {};
-    Array.from(searchParams.entries()).forEach(([key, value]) => {
-      searchParamsObj[key] = value;
+  const searchParamsObj = useMemo(() => {
+    const params: Record<string, string> = {};
+    searchParams.forEach((value, key) => {
+      params[key] = value;
     });
+    return params;
+  }, [searchParams]);
+
+  useEffect(() => {
     dispatch(fetchBooks(searchParamsObj));
-  }, [dispatch, searchParams]);
+  }, [dispatch, searchParams, searchParamsObj]);
 
   return (
     <>

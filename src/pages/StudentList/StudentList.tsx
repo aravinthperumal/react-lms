@@ -2,7 +2,7 @@ import { useSelector } from "_state/useSelector";
 import Table from "pages/components/table/Table";
 import { studentColumns } from "./tableColumns";
 import { useDispatch } from "_state/useDispatch";
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import { fetchStudents } from "./_state/studentSlice";
 import SearchBar, { FilterDef } from "pages/components/SearchBar/SearchBar";
 import { useSearchParams } from "react-router-dom";
@@ -17,15 +17,18 @@ export const StudentList: React.FC = () => {
   const dispatch = useDispatch();
   const [searchParams] = useSearchParams();
 
-  useEffect(() => {
-    const searchParamsObj: Record<string, string> = {};
-    //extract params from router search params
-    Array.from(searchParams.entries()).forEach(([key, value]) => {
-      searchParamsObj[key] = value;
+  //extract params from router search params
+  const searchParamsObj = useMemo(() => {
+    const params: Record<string, string> = {};
+    searchParams.forEach((value, key) => {
+      params[key] = value;
     });
+    return params;
+  }, [searchParams]);
 
+  useEffect(() => {
     dispatch(fetchStudents(searchParamsObj));
-  }, [dispatch, searchParams]);
+  }, [dispatch, searchParamsObj]);
 
   return (
     <>
