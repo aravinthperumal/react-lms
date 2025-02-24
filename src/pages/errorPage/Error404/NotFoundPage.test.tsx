@@ -2,7 +2,7 @@ import { renderWithProviders, screen } from "utils/test-utils";
 import { NotFoundPage } from "./NotFoundPage";
 
 describe("Page not found", () => {
-  test('Display "Go to Home" link when user is logged in', () => {
+  it('Display "Go to Home" link when user is logged in', () => {
     renderWithProviders(<NotFoundPage />, {
       preloadedState: {
         user: { isUserLoggedIn: true },
@@ -16,7 +16,7 @@ describe("Page not found", () => {
     );
   });
 
-  test('displays "Go to Login" link when user is not logged in', () => {
+  it('displays "Go to Login" link when user is not logged in', () => {
     renderWithProviders(<NotFoundPage />, {
       preloadedState: {
         user: { isUserLoggedIn: false },

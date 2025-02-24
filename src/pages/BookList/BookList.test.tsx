@@ -11,7 +11,7 @@ jest.mock("axios");
 const mockedAxios = axios as jest.Mocked<typeof axios>;
 
 describe("BookList", () => {
-  test("Book List with initial state", () => {
+  it("Book List with initial state", () => {
     renderWithProviders(<BookList />, {
       preloadedState: { book: { bookList: [], isLoading: false } },
     });
@@ -21,7 +21,7 @@ describe("BookList", () => {
     expect(screen.getByPlaceholderText(/Search by id/i)).toBeInTheDocument();
   });
 
-  test("fetch and displays books", async () => {
+  it("fetch and displays books", async () => {
     mockedAxios.get.mockResolvedValueOnce({ data: bookData });
 
     const store = setupStore();
@@ -34,7 +34,7 @@ describe("BookList", () => {
     expect(screen.getByText(/LBOOK0001/i)).toBeInTheDocument();
   });
 
-  test("displays loading while fetching books", async () => {
+  it("displays loading while fetching books", async () => {
     mockedAxios.get.mockImplementation(() => new Promise(() => {}));
 
     renderWithProviders(<StudentList />, {

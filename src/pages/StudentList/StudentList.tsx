@@ -6,6 +6,7 @@ import Table from "pages/components/table/Table";
 import SearchBar, { FilterDef } from "pages/components/searchBar/SearchBar";
 import { studentColumns } from "./tableColumns";
 import { fetchStudents } from "./_state/studentSlice";
+import PanelHeader from "pages/components/panelHeader/PanelHeader";
 
 const filters: FilterDef[] = [
   { key: "name", placeholder: "Search by name" },
@@ -32,7 +33,7 @@ export const StudentList: React.FC = () => {
 
   return (
     <>
-      <h2>Student List</h2>
+      <PanelHeader title="Student List" />
       <SearchBar filters={filters} />
       <Table loading={isLoading} rows={studentList} columns={studentColumns} />
     </>

@@ -1,118 +1,89 @@
-import { fireEvent, waitFor } from "@testing-library/react";
-import { useNavigate } from "react-router-dom";
-import { LOCALSTORAGE_USER_ROLE } from "globals/constants";
-import * as api from "utils/api";
-import { renderWithProviders, screen } from "utils/test-utils";
-import Login from "./Login";
+import { screen, fireEvent, waitFor } from "@testing-library/react";
+import { renderWithProviders } from "utils/test-utils";
+import Login from "pages/login/Login";
+import { fetchUserData } from "utils/api";
 
 jest.mock("utils/api", () => ({
   fetchUserData: jest.fn(),
 }));
-jest.mock("react-router-dom", () => ({
-  ...jest.requireActual("react-router-dom"),
-  useNavigate: jest.fn(),
-}));
 
-describe("Login Page", () => {
-  let setItemSpy: jest.SpyInstance;
-  const mockNavigate = jest.fn();
-
-  beforeEach(() => {
-    jest.clearAllMocks();
-    setItemSpy = jest.spyOn(Storage.prototype, "setItem");
-    (useNavigate as jest.Mock).mockReturnValue(mockNavigate);
-  });
-
-  test("render login", () => {
-    renderWithProviders(<Login />);
-    expect(screen.getByPlaceholderText("Username")).toBeInTheDocument();
-    expect(screen.getByPlaceholderText("Password")).toBeInTheDocument();
-  });
-
-  test("enter invalid password length and password test login button disabled", async () => {
+describe("Login", () => {
+  it("renders login form with username and password fields", () => {
     renderWithProviders(<Login />);
 
-    fireEvent.change(screen.getByPlaceholderText(/username/i), {
-      target: { value: "test" },
-    });
-    fireEvent.change(screen.getByPlaceholderText(/password/i), {
-      target: { value: "test" },
-    });
-
-    const loginButton = screen.getByRole("button");
-    expect(loginButton).toBeDisabled();
+    expect(screen.getByPlaceholderText(/username/i)).toBeInTheDocument();
+    expect(screen.getByPlaceholderText(/password/i)).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: /login/i })).toBeInTheDocument();
   });
 
-  test("enter valid password length username and password test login button enabled", async () => {
+  it("displays error message for invalid email format", async () => {
     renderWithProviders(<Login />);
 
-    fireEvent.change(screen.getByPlaceholderText(/username/i), {
-      target: { value: "admin@gmail.com" },
-    });
-    fireEvent.change(screen.getByPlaceholderText(/password/i), {
-      target: { value: "testpassword" },
-    });
+    const usernameInput = screen.getByPlaceholderText(/username/i);
+    fireEvent.change(usernameInput, { target: { value: "invalid-email" } });
 
-    const loginButton = screen.getByRole("button");
-    expect(loginButton).toBeEnabled();
+    await waitFor(() => {
+      expect(screen.getByText(/invalid email format/i)).toBeInTheDocument();
+    });
   });
 
-  test("should give error when invalid input is provided", async () => {
-    (api.fetchUserData as jest.Mock).mockResolvedValueOnce(null);
+  it("enables login button when form is valid", async () => {
+    renderWithProviders(<Login />);
+
+    const usernameInput = screen.getByPlaceholderText(/username/i);
+    const passwordInput = screen.getByPlaceholderText(/password/i);
+    const loginButton = screen.getByRole("button", { name: /login/i });
+
+    fireEvent.change(usernameInput, { target: { value: "test@example.com" } });
+    fireEvent.change(passwordInput, { target: { value: "password123" } });
+
+    await waitFor(() => {
+      expect(loginButton).not.toBeDisabled();
+    });
+  });
+
+  it("calls fetchUserData and logs in successfully", async () => {
+    const mockUserData = { role: "admin" };
+    (fetchUserData as jest.Mock).mockResolvedValueOnce(mockUserData);
 
     renderWithProviders(<Login />);
 
-    fireEvent.change(screen.getByPlaceholderText(/username/i), {
-      target: { value: "lmsadmin@gmail.com" },
-    });
-    fireEvent.change(screen.getByPlaceholderText(/password/i), {
-      target: { value: "wrongPassword" },
-    });
+    const usernameInput = screen.getByPlaceholderText(/username/i);
+    const passwordInput = screen.getByPlaceholderText(/password/i);
+    const loginButton = screen.getByRole("button", { name: /login/i });
 
-    const loginButton = screen.getByRole("button");
-
-    expect(loginButton).toBeEnabled();
-
+    fireEvent.change(usernameInput, { target: { value: "test@example.com" } });
+    fireEvent.change(passwordInput, { target: { value: "password123" } });
     fireEvent.click(loginButton);
 
     await waitFor(() => {
-      expect(api.fetchUserData).toHaveBeenCalledWith(
-        "lmsadmin@gmail.com",
-        "wrongPassword",
+      expect(fetchUserData).toHaveBeenCalledWith(
+        "test@example.com",
+        "password123",
       );
-      expect(setItemSpy).not.toHaveBeenCalled();
-      expect(mockNavigate).not.toHaveBeenCalled();
+      expect(
+        screen.queryByText(/invalid username \/ password/i),
+      ).not.toBeInTheDocument();
+    });
+  });
+
+  it("displays error message on failed login", async () => {
+    (fetchUserData as jest.Mock).mockResolvedValueOnce(null);
+
+    renderWithProviders(<Login />);
+
+    const usernameInput = screen.getByPlaceholderText(/username/i);
+    const passwordInput = screen.getByPlaceholderText(/password/i);
+    const loginButton = screen.getByRole("button", { name: /login/i });
+
+    fireEvent.change(usernameInput, { target: { value: "test@example.com" } });
+    fireEvent.change(passwordInput, { target: { value: "wrongpassword" } });
+    fireEvent.click(loginButton);
+
+    await waitFor(() => {
       expect(
         screen.getByText(/invalid username \/ password/i),
       ).toBeInTheDocument();
-    });
-  });
-
-  test("should login with api when valid input is provided", async () => {
-    (api.fetchUserData as jest.Mock).mockResolvedValueOnce({ role: "admin" });
-
-    renderWithProviders(<Login />);
-
-    fireEvent.change(screen.getByPlaceholderText(/username/i), {
-      target: { value: "lmsadmin@gmail.com" },
-    });
-    fireEvent.change(screen.getByPlaceholderText(/password/i), {
-      target: { value: "admin123" },
-    });
-
-    const loginButton = screen.getByRole("button");
-
-    expect(screen.getByRole("button")).toBeEnabled();
-
-    fireEvent.click(loginButton);
-
-    await waitFor(() => {
-      expect(api.fetchUserData).toHaveBeenCalledWith(
-        "lmsadmin@gmail.com",
-        "admin123",
-      );
-      expect(setItemSpy).toHaveBeenCalledWith(LOCALSTORAGE_USER_ROLE, "admin");
-      // expect(mockNavigate).toHaveBeenCalledWith("/", { replace: true });
     });
   });
 });

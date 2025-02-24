@@ -2,8 +2,9 @@ import React, { useCallback, useEffect, useState } from "react";
 import { createSearchParams, useLocation, useNavigate } from "react-router-dom";
 import { EMPTY_VALUE } from "globals/constants";
 import { isEnterKey } from "utils/functions/keyboardFunctions";
-import { Button, StyledSearchBarContainer } from "./SearchBar.sc";
 import Input from "../input/Input";
+import { StyledSearchBarContainer } from "./SearchBar.sc";
+import Button from "../button/Button";
 
 export interface FilterDef {
   key: string;

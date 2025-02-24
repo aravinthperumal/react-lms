@@ -20,7 +20,7 @@
       "id": "STD0001",
       "name": "Akash K",
       "department": "ECE",
-      "booksBorrowed": ["LBOOK0003"]
+      "booksBorrowed": ["LBOOK0003", "LBOOK0003"]
     },
     {
       "id": "STD0002",

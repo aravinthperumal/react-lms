@@ -10,7 +10,7 @@ jest.mock("axios");
 const mockedAxios = axios as jest.Mocked<typeof axios>;
 
 describe("StudentList", () => {
-  test("Student List with initial state", () => {
+  it("Student List with initial state", () => {
     renderWithProviders(<StudentList />, {
       preloadedState: { student: { studentList: [], isLoading: false } },
     });
@@ -20,7 +20,7 @@ describe("StudentList", () => {
     expect(screen.getByPlaceholderText(/Search by id/i)).toBeInTheDocument();
   });
 
-  test("fetch and displays students", async () => {
+  it("fetch and displays students", async () => {
     mockedAxios.get.mockResolvedValueOnce({ data: studentData });
 
     const store = setupStore();
@@ -33,7 +33,7 @@ describe("StudentList", () => {
     expect(screen.getByText(/STD0001/i)).toBeInTheDocument();
   });
 
-  test("displays loading while fetching students", async () => {
+  it("displays loading while fetching students", async () => {
     mockedAxios.get.mockImplementation(() => new Promise(() => {}));
 
     renderWithProviders(<StudentList />, {
@@ -43,7 +43,7 @@ describe("StudentList", () => {
     expect(screen.getByText(/Loading.../i)).toBeInTheDocument();
   });
 
-  test("handles API failure", async () => {
+  it("handles API failure", async () => {
     mockedAxios.get.mockRejectedValueOnce(new Error("Failed to fetch"));
 
     const store = setupStore();
@@ -53,7 +53,7 @@ describe("StudentList", () => {
       expect(store.getState().student.studentList).toEqual([]);
     });
   });
-  test("Student list with pagination", async () => {
+  it("Student list with pagination", async () => {
     mockedAxios.get.mockResolvedValueOnce({ data: studentData });
 
     const store = setupStore();

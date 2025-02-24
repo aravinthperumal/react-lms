@@ -4,7 +4,7 @@ import Input from "./Input";
 describe("Input", () => {
   const mockOnChange = jest.fn();
 
-  test("renders the input component", () => {
+  it("renders the input component", () => {
     renderWithProviders(
       <Input value="" name="input" onChange={mockOnChange} />,
     );
@@ -12,7 +12,7 @@ describe("Input", () => {
     expect(inputElement).toBeInTheDocument();
   });
 
-  test("test with value", () => {
+  it("test with value", () => {
     renderWithProviders(
       <Input value="test" name="input" onChange={mockOnChange} />,
     );
@@ -20,7 +20,7 @@ describe("Input", () => {
     expect(inputElement).toHaveValue("test");
   });
 
-  test("handle onChange event", () => {
+  it("handle onChange event", () => {
     renderWithProviders(
       <Input value="" name="input" onChange={mockOnChange} />,
     );
@@ -29,7 +29,7 @@ describe("Input", () => {
     expect(mockOnChange).toHaveBeenCalled();
   });
 
-  test("test with error message", () => {
+  it("test with error message", () => {
     renderWithProviders(
       <Input
         value="test"
