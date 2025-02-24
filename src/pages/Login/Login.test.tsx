@@ -1,9 +1,9 @@
 import { fireEvent, waitFor } from "@testing-library/react";
-import Login from "./Login";
-import * as api from "utils/api";
 import { useNavigate } from "react-router-dom";
 import { LOCALSTORAGE_USER_ROLE } from "globals/constants";
+import * as api from "utils/api";
 import { renderWithProviders, screen } from "utils/test-utils";
+import Login from "./Login";
 
 jest.mock("utils/api", () => ({
   fetchUserData: jest.fn(),

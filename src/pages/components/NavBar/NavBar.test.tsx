@@ -1,5 +1,5 @@
-import { NavBar } from "./NavBar";
 import { renderWithProviders, screen } from "utils/test-utils";
+import { NavBar } from "./NavBar";
 
 describe("NavBar", () => {
   it("render the navbar correctly", () => {

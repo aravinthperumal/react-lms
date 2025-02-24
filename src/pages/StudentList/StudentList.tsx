@@ -1,11 +1,11 @@
-import { useSelector } from "_state/useSelector";
-import Table from "pages/components/table/Table";
-import { studentColumns } from "./tableColumns";
-import { useDispatch } from "_state/useDispatch";
 import { useEffect, useMemo } from "react";
-import { fetchStudents } from "./_state/studentSlice";
-import SearchBar, { FilterDef } from "pages/components/SearchBar/SearchBar";
 import { useSearchParams } from "react-router-dom";
+import { useSelector } from "_state/useSelector";
+import { useDispatch } from "_state/useDispatch";
+import Table from "pages/components/table/Table";
+import SearchBar, { FilterDef } from "pages/components/searchBar/SearchBar";
+import { studentColumns } from "./tableColumns";
+import { fetchStudents } from "./_state/studentSlice";
 
 const filters: FilterDef[] = [
   { key: "name", placeholder: "Search by name" },

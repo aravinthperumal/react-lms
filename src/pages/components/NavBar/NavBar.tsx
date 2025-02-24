@@ -1,5 +1,8 @@
 import { useCallback, useState } from "react";
 import { useNavigate } from "react-router";
+import { useDispatch } from "_state/useDispatch";
+import { setIsUserLoggedIn } from "pages/login/_state/userSlice";
+import { LOCALSTORAGE_USER_ROLE } from "globals/constants";
 import {
   LogOutButton,
   StyledHamburger,
@@ -9,9 +12,6 @@ import {
   StyledNavBar,
 } from "./NavBar.sc";
 import { menuItems } from "./menuItems";
-import { LOCALSTORAGE_USER_ROLE } from "globals/constants";
-import { useDispatch } from "_state/useDispatch";
-import { setIsUserLoggedIn } from "pages/login/_state/userSlice";
 
 export const NavBar: React.FC = () => {
   const navigate = useNavigate();

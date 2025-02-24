@@ -1,10 +1,6 @@
 import React, { useCallback, useMemo, useState } from "react";
-
 import { useNavigate } from "react-router";
-import {
-  LOCALSTORAGE_USER_ROLE,
-  MINIMUM_PASSWORD_LENGTH,
-} from "globals/constants";
+import { LOCALSTORAGE_USER_ROLE } from "globals/constants";
 import {
   ErrorText,
   LoginCardWrapper,
@@ -13,17 +9,14 @@ import {
   SubmitButton,
 } from "./Login.sc";
 import { fetchUserData } from "utils/api";
-import { Navigate } from "react-router";
+import { isEmpty, isValidEmail } from "utils/functions/validationFunctions";
+import { isEnterKey } from "utils/functions/keyboardFunctions";
 import Input from "pages/components/input/Input";
 import { useDispatch } from "_state/useDispatch";
 import { setIsUserLoggedIn } from "./_state/userSlice";
-import { useSelector } from "_state/useSelector";
-import { isEmpty, isValidEmail } from "utils/functions/validationFunctions";
-import { isEnterKey } from "utils/functions/keyboardFunctions";
 
 const Login: React.FC = () => {
   const dispatch = useDispatch();
-  const isUserLoggedIn = useSelector(({ user }) => user.isUserLoggedIn);
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -49,19 +42,6 @@ const Login: React.FC = () => {
     }
   }, []);
 
-  const validatePassword = useCallback((password: string) => {
-    if (isEmpty(password)) {
-      setFormError((prev) => ({ ...prev, password: "Password is required" }));
-    } else if (password.length < MINIMUM_PASSWORD_LENGTH) {
-      setFormError((prev) => ({
-        ...prev,
-        password: `Password should contain minimum ${MINIMUM_PASSWORD_LENGTH} character`,
-      }));
-    } else {
-      setFormError((prev) => ({ ...prev, password: "" }));
-    }
-  }, []);
-
   const onChangeUserName = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
       setUsername(event.target.value);
@@ -73,9 +53,8 @@ const Login: React.FC = () => {
   const onChangePassword = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
       setPassword(event.target.value);
-      validatePassword(event.target.value);
     },
-    [validatePassword],
+    [],
   );
 
   const handleSubmit = useCallback(async () => {
@@ -131,7 +110,6 @@ const Login: React.FC = () => {
           {error && <ErrorText>{error}</ErrorText>}
         </LoginContainer>
       </LoginCardWrapper>
-      {isUserLoggedIn && <Navigate to={"/"} />}
     </>
   );
 };

@@ -1,9 +1,9 @@
 import React, { useCallback, useEffect, useState } from "react";
+import { createSearchParams, useLocation, useNavigate } from "react-router-dom";
+import { EMPTY_VALUE } from "globals/constants";
+import { isEnterKey } from "utils/functions/keyboardFunctions";
 import { Button, StyledSearchBarContainer } from "./SearchBar.sc";
 import Input from "../input/Input";
-import { EMPTY_VALUE } from "globals/constants";
-import { useLocation, useNavigate } from "react-router-dom";
-import { isEnterKey } from "utils/functions/keyboardFunctions";
 
 export interface FilterDef {
   key: string;
@@ -19,8 +19,9 @@ const SearchBar: React.FC<SearchBarProps> = ({ filters }) => {
   const navigate = useNavigate();
   const location = useLocation();
 
+  //every page reload filter values will be updated using url query
   useEffect(() => {
-    const urlSearchParams = new URLSearchParams(location.search);
+    const urlSearchParams = createSearchParams(location.search); // need to check functions
     const filterParamsFromUrl: Record<string, string> = {};
     filters.forEach((filter) => {
       const value = urlSearchParams.get(filter.key);
@@ -49,13 +50,13 @@ const SearchBar: React.FC<SearchBarProps> = ({ filters }) => {
   );
 
   const handleSearch = useCallback(() => {
-    const queryParams = new URLSearchParams();
+    const queryParams = createSearchParams();
     Object.entries(filterParams).forEach(([key, value]) => {
       if (value) {
         queryParams.set(key, value);
       }
     });
-    // navigate to same page with search query params updated
+    // navigate to same page with search query params updated page
     navigate(
       {
         pathname: location.pathname,

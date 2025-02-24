@@ -14,6 +14,7 @@ export default {
     "^_state/(.*)$": "<rootDir>/src/_state/$1",
   },
   setupFilesAfterEnv: ["<rootDir>/jest.setup.ts"],
+  moduleDirectories: ["node_modules", "src", "test"],
   collectCoverage: true,
   coverageThreshold: {
     global: {

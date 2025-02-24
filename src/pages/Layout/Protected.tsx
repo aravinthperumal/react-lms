@@ -1,6 +1,6 @@
-import { BasePageLayout } from "./BasePageLayout";
 import { Navigate } from "react-router";
 import { useSelector } from "_state/useSelector";
+import { BasePageLayout } from "./BasePageLayout";
 
 export const Protected: React.FC = () => {
   const isUserLoggedIn = useSelector(({ user }) => user.isUserLoggedIn);

@@ -1,11 +1,11 @@
+import { useSearchParams } from "react-router-dom";
+import SearchBar, { FilterDef } from "pages/components/searchBar/SearchBar";
 import { useDispatch } from "_state/useDispatch";
 import { useSelector } from "_state/useSelector";
 import Table from "pages/components/table/Table";
 import { useEffect, useMemo } from "react";
 import { fetchBooks } from "./_state/bookSlice";
 import { bookColumns } from "./tableColumns";
-import SearchBar, { FilterDef } from "pages/components/SearchBar/SearchBar";
-import { useSearchParams } from "react-router-dom";
 
 const filters: FilterDef[] = [
   { key: "title", placeholder: "Search by title" },

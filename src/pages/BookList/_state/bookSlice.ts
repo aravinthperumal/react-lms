@@ -1,6 +1,6 @@
+import axios from "axios";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { Book, BookState } from "./types";
-import axios from "axios";
 import { baseURL } from "globals/server";
 
 const initialState: BookState = {

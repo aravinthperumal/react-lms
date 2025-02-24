@@ -1,10 +1,10 @@
+import { useCallback } from "react";
 import {
   Description,
   ErrorCardWrapper,
   RefreshButton,
   Title,
 } from "./ErrorBoundary.sc";
-import { useCallback } from "react";
 
 export const ErrorBoundaryCard: React.FC = () => {
   const handleClick = useCallback(() => {

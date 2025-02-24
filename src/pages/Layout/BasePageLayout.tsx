@@ -1,8 +1,8 @@
-import { NavBar } from "pages/components/navBar/NavBar";
 import { Outlet, useLocation } from "react-router";
-import { StyledBasePageLayout } from "./BasePageLayout.sc";
 import { ErrorBoundary } from "react-error-boundary";
+import { NavBar } from "pages/components/navBar/NavBar";
 import { ErrorBoundaryCard } from "pages/errorPage/ErrorBoundary/ErrorBoundaryCard";
+import { StyledBasePageLayout } from "./BasePageLayout.sc";
 
 export const BasePageLayout: React.FC = () => {
   const location = useLocation();
