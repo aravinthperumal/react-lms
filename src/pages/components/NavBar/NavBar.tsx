@@ -1,7 +1,6 @@
 import { useCallback, useState } from "react";
 import { useNavigate } from "react-router";
 import { useDispatch } from "_state/useDispatch";
-import { setIsUserLoggedIn } from "pages/login/_state/userSlice";
 import { LOCALSTORAGE_USER_ROLE } from "globals/constants";
 import {
   LogOutButton,
@@ -12,8 +11,12 @@ import {
   StyledNavBar,
 } from "./NavBar.sc";
 import { menuItems } from "./menuItems";
+import { logOut } from "pages/login/_state/userSlice";
+import { useSelector } from "_state/useSelector";
+import { removeFromLocalStorage } from "utils/localStorage/localStorage";
 
 export const NavBar: React.FC = () => {
+  const { name } = useSelector(({ user }) => user.user);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(false);
@@ -24,14 +27,14 @@ export const NavBar: React.FC = () => {
   );
 
   const onLogOut = useCallback(() => {
-    localStorage.removeItem(LOCALSTORAGE_USER_ROLE);
-    dispatch(setIsUserLoggedIn(false));
+    removeFromLocalStorage(LOCALSTORAGE_USER_ROLE);
+    dispatch(logOut());
     navigate("/login", { replace: true });
   }, [dispatch, navigate]);
 
   return (
     <StyledNavBar>
-      <StyledLogo>Library Management</StyledLogo>
+      <StyledLogo>LMS Welcome {name}</StyledLogo>
       <StyledHamburger onClick={toggleMenu}>
         <span />
         <span />

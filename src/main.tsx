@@ -6,7 +6,7 @@ import { store } from "./_state/store.ts";
 
 createRoot(document.getElementById("root")!).render(
   <Provider store={store}>
-    <BrowserRouter basename="/react-lms">
+    <BrowserRouter>
       <App />
     </BrowserRouter>
   </Provider>,

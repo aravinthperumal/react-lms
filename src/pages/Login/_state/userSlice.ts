@@ -1,24 +1,31 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { LOCALSTORAGE_USER_ROLE } from "globals/constants";
+import { getFromLocalStorage } from "utils/localStorage/localStorage";
+import { User } from "utils/types";
 
-interface InitialState {
+interface LoginState {
   isUserLoggedIn: boolean;
+  user: User;
 }
-const initialState: InitialState = {
-  isUserLoggedIn:
-    localStorage.getItem(LOCALSTORAGE_USER_ROLE) !== null || false,
+const initialState: LoginState = {
+  isUserLoggedIn: Boolean(getFromLocalStorage(LOCALSTORAGE_USER_ROLE)),
+  user: {} as User,
 };
 
 const userSlice = createSlice({
   initialState,
   name: "userSlice",
   reducers: {
-    setIsUserLoggedIn: (state, action: PayloadAction<boolean>) => ({
-      ...state,
-      isUserLoggedIn: action.payload,
-    }),
+    login: (state, action: PayloadAction<{ user: User }>) => {
+      state.isUserLoggedIn = true;
+      state.user = action.payload.user;
+    },
+    logOut: (state) => {
+      state.isUserLoggedIn = false;
+      state.user = {} as User;
+    },
   },
 });
 
 export const user = userSlice.reducer;
-export const { setIsUserLoggedIn } = userSlice.actions;
+export const { logOut, login } = userSlice.actions;

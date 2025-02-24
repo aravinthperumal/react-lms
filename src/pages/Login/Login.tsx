@@ -13,7 +13,8 @@ import { isEmpty, isValidEmail } from "utils/functions/validationFunctions";
 import { isEnterKey } from "utils/functions/keyboardFunctions";
 import Input from "pages/components/input/Input";
 import { useDispatch } from "_state/useDispatch";
-import { setIsUserLoggedIn } from "./_state/userSlice";
+import { setToLocalStorage } from "utils/localStorage/localStorage";
+import { login } from "./_state/userSlice";
 
 const Login: React.FC = () => {
   const dispatch = useDispatch();
@@ -58,14 +59,19 @@ const Login: React.FC = () => {
   );
 
   const handleSubmit = useCallback(async () => {
-    const data = await fetchUserData(username, password);
-    if (data) {
-      //persist the login detail for page refresh
-      localStorage.setItem(LOCALSTORAGE_USER_ROLE, data.role);
-      dispatch(setIsUserLoggedIn(true));
-      navigate("/", { replace: true });
-    } else {
-      setError("invalid username / password");
+    try {
+      const data = await fetchUserData(username, password);
+      if (data) {
+        //persist the login detail for page refresh
+        setToLocalStorage(LOCALSTORAGE_USER_ROLE, data.role);
+        dispatch(login({ user: data }));
+        navigate("/", { replace: true });
+      } else {
+        setError("invalid username / password");
+      }
+    } catch (e) {
+      console.log("Server error", e);
+      setError("An error occurred, please try again later");
     }
   }, [username, password, dispatch, navigate]);
 
