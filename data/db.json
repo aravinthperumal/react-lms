@@ -1,14 +1,14 @@
 {
   "users": [
     {
-      "id": "1",
+      "id": 1,
       "name": "Kishore",
       "username": "lmsadmin@gmail.com",
       "password": "admin123",
       "role": "admin"
     },
     {
-      "id": "2",
+      "id": 2,
       "name": "Prakash",
       "username": "lmslibrarian@gmail.com",
       "password": "library123",
@@ -17,40 +17,18 @@
   ],
   "students": [
     {
-      "id": "STD0001",
+      "id": 1,
       "name": "Akash K",
       "department": "ECE",
+      "email": "akash@kiot.in",
       "booksBorrowed": ["LBOOK0003", "LBOOK0003"]
     },
     {
-      "id": "STD0002",
+      "id": 2,
       "name": "Prakash",
       "department": "EEE",
+      "email": "prakash@kiot.in",
       "booksBorrowed": ["LBOOK0003"]
-    },
-    {
-      "id": "STD0003",
-      "name": "Aravinth",
-      "department": "CSE",
-      "booksBorrowed": []
-    },
-    {
-      "id": "STD0004",
-      "name": "Kishore",
-      "department": "EEE",
-      "booksBorrowed": ["LBOOK0003", "LBOOK0002"]
-    },
-    {
-      "id": "STD0005",
-      "name": "leo",
-      "department": "CSE",
-      "booksBorrowed": ["LBOOK0002"]
-    },
-    {
-      "id": "STD0006",
-      "name": "leo",
-      "department": "CSE",
-      "booksBorrowed": ["LBOOK0001"]
     }
   ],
   "books": [
