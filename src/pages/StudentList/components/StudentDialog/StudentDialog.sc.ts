@@ -47,3 +47,7 @@ export const Error = styled.span`
   color: red;
   font-size: 12px;
 `;
+export const TableButtonWrapper = styled.div`
+  display: flex;
+  gap: 10px;
+`;

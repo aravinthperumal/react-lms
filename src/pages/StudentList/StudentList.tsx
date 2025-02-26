@@ -2,16 +2,18 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { useSelector } from "_state/useSelector";
 import { useDispatch } from "_state/useDispatch";
+import { fetchStudents } from "./_state/studentSlice";
+import { Student } from "./_state/types";
+import { EDIT_MODE } from "globals/constants";
 import Table from "pages/components/table/Table";
 import SearchBar, { FilterDef } from "pages/components/searchBar/SearchBar";
-import { studentColumns } from "./tableColumns";
-import { fetchStudents } from "./_state/studentSlice";
 import PanelHeader from "pages/components/panelHeader/PanelHeader";
 import Button from "pages/components/button/Button";
 import Modal from "pages/components/modal/Modal";
-import { StudentDialog } from "./components/StudentDialog";
-import { Student } from "./_state/types";
-import { EDIT_MODE } from "globals/constants";
+import { StudentDialog } from "./components/StudentDialog/StudentDialog";
+import { DeleteStudentDialog } from "./components/DeleteStudentDialog/DeleteStudentDialog";
+import { studentColumns } from "./tableColumns";
+import { toast } from "react-toastify";
 
 const filters: FilterDef[] = [
   { key: "name", placeholder: "Search by name" },
@@ -23,7 +25,11 @@ export const StudentList: React.FC = () => {
   const dispatch = useDispatch();
   const [searchParams] = useSearchParams();
   const [openStudentDialog, setOpenStudentDialog] = useState(false);
-  const [selectedStudent, setSelectedStudent] = useState({} as Student);
+  const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
+  const [selectedStudent, setSelectedStudent] = useState<Student>(
+    {} as Student,
+  );
+  const [editMode, setEditMode] = useState(EDIT_MODE.ADD);
 
   //extract params from router search params
   const searchParamsObj = useMemo(() => {
@@ -38,8 +44,16 @@ export const StudentList: React.FC = () => {
     dispatch(fetchStudents(searchParamsObj));
   }, [dispatch, searchParamsObj]);
 
-  const onAddCallback = useCallback(() => {
+  const onAdd = useCallback(() => {
     setOpenStudentDialog(true);
+    setSelectedStudent({} as Student);
+    setEditMode(EDIT_MODE.ADD);
+  }, []);
+
+  const onEdit = useCallback((row: Student) => {
+    setOpenStudentDialog(true);
+    setSelectedStudent(row);
+    setEditMode(EDIT_MODE.EDIT);
   }, []);
 
   const onCloseStudentDialog = useCallback(() => {
@@ -47,20 +61,44 @@ export const StudentList: React.FC = () => {
     setSelectedStudent({} as Student);
   }, []);
 
+  const onDelete = useCallback((student: Student) => {
+    if (student.booksBorrowed.length > 0) {
+      toast.error("Student has borrowed books", { position: "top-right" });
+    } else {
+      setOpenDeleteDialog(true);
+      setSelectedStudent(student);
+    }
+  }, []);
+
+  const onCloseDeleteDialog = useCallback(() => {
+    setOpenDeleteDialog(false);
+    setSelectedStudent({} as Student);
+  }, []);
   return (
     <>
       <PanelHeader
         title="Student List"
-        buttons={<Button onClick={onAddCallback}>{"Add Student"}</Button>}
+        buttons={<Button onClick={onAdd}>{"Add Student"}</Button>}
       />
       <SearchBar filters={filters} />
-      <Table loading={isLoading} rows={studentList} columns={studentColumns} />
+      <Table
+        loading={isLoading}
+        rows={studentList}
+        columns={studentColumns(onEdit, onDelete)}
+      />
 
       <Modal isOpen={openStudentDialog}>
         <StudentDialog
-          editMode={EDIT_MODE.ADD}
+          studentList={studentList}
+          editMode={editMode}
           onClose={onCloseStudentDialog}
           previousStudent={selectedStudent}
+        />
+      </Modal>
+      <Modal isOpen={openDeleteDialog}>
+        <DeleteStudentDialog
+          onClose={onCloseDeleteDialog}
+          selectedStudent={selectedStudent}
         />
       </Modal>
     </>

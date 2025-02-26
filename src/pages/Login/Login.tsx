@@ -15,6 +15,7 @@ import Input from "pages/components/input/Input";
 import { useDispatch } from "_state/useDispatch";
 import { setToLocalStorage } from "utils/localStorage/localStorage";
 import { login } from "./_state/userSlice";
+import { toast } from "react-toastify";
 
 const Login: React.FC = () => {
   const dispatch = useDispatch();
@@ -71,7 +72,9 @@ const Login: React.FC = () => {
       }
     } catch (e) {
       console.log("Server error", e);
-      setError("An error occurred, please try again later");
+      toast.error("Server error occurred! Please try again", {
+        position: "bottom-right",
+      });
     }
   }, [username, password, dispatch, navigate]);
 

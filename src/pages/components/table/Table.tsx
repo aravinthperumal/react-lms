@@ -13,7 +13,7 @@ import {
 
 export interface Column<T> {
   id: keyof T;
-  label: string;
+  label?: string;
   render?: (row: T) => React.ReactNode; //custom cell renderer
 }
 

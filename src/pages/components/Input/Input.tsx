@@ -8,6 +8,7 @@ interface InputProps {
   name: string;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onKeyDown?: (event: KeyboardEvent<HTMLInputElement>) => void;
+  isDisabled?: boolean;
   hasError?: boolean;
   errorMessage?: string;
 }
@@ -19,6 +20,7 @@ const Input: React.FC<InputProps> = ({
   name,
   onChange,
   hasError,
+  isDisabled,
   errorMessage,
   onKeyDown,
 }) => {
@@ -29,6 +31,7 @@ const Input: React.FC<InputProps> = ({
         placeholder={placeholder}
         value={value}
         name={name}
+        disabled={isDisabled}
         $hasError={hasError}
         onChange={onChange}
         onKeyDown={onKeyDown}
