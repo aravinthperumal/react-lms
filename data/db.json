@@ -17,56 +17,38 @@
   ],
   "students": [
     {
-      "name": "leo",
-      "email": "leo@gmail.com",
-      "department": "Ece",
-      "booksBorrowed": [],
-      "id": "66c4"
+      "id": "88aa",
+      "name": "Aravinth",
+      "email": "aravinth.perumal@aspiresys.com",
+      "department": "EEE",
+      "booksBorrowed": []
     },
     {
       "name": "Akash K",
       "email": "akash@kiot.in",
-      "department": "EEE",
+      "department": "ECE",
       "booksBorrowed": [],
-      "id": "b105"
+      "id": "6c4a"
     }
   ],
   "books": [
     {
-      "id": "LBOOK0001",
-      "title": "Introduction to Algorithms",
-      "author": "Thomas H. Cormen",
-      "category": "Computer Science",
-      "isbn": "9780262033848",
-      "totalCopies": 5,
-      "availableCopies": 3
-    },
-    {
-      "id": "LBOOK0002",
-      "title": "Clean Code",
-      "author": "Robert C. Martin",
-      "category": "Software Engineering",
-      "isbn": "9780132350884",
-      "totalCopies": 4,
-      "availableCopies": 2
-    },
-    {
-      "id": "LBOOK0003",
-      "title": "Mathematics for Computer Science",
+      "title": "Java",
       "author": "Eric Lehman",
-      "category": "Mathematics",
+      "category": "Education",
+      "isbn": "9780262033840",
+      "totalCopies": 2,
+      "availableCopies": 1,
+      "id": "c4b9"
+    },
+    {
+      "id": "4743",
+      "title": "Automation",
+      "author": "Aron",
+      "category": "AI",
       "isbn": "9780134105101",
-      "totalCopies": 6,
-      "availableCopies": 6
-    },
-    {
-      "id": "LBOOK0004",
-      "title": "Electronics and communication",
-      "author": "Eric Lehman",
-      "category": "Electronics",
-      "isbn": "9780134105456",
-      "totalCopies": 6,
-      "availableCopies": 6
+      "totalCopies": 1,
+      "availableCopies": 0
     }
   ]
 }

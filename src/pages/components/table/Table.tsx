@@ -10,6 +10,7 @@ import {
   StyledTh,
   StyledTr,
 } from "./Table.sc";
+import { NUMBER_ZERO } from "globals/constants";
 
 export interface Column<T> {
   id: keyof T;
@@ -90,7 +91,7 @@ export default function Table<T>(props: TableProps<T>) {
           )}
         </StyledTbody>
       </StyledTable>
-      {displayRows.length > 0 && (
+      {displayRows.length > NUMBER_ZERO && (
         <PaginationContainer>
           <PaginationButton
             onClick={handlePreviousPage}
