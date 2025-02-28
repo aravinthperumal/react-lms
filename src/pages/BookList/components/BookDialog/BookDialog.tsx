@@ -11,12 +11,7 @@ import {
 } from "./BookDialog.sc";
 import Button from "pages/components/button/Button";
 import Input from "pages/components/input/Input";
-import {
-  EDIT_MODE,
-  EMPTY_VALUE,
-  NUMBER_ONE,
-  NUMBER_ZERO,
-} from "globals/constants";
+import { EDIT_MODE, EMPTY_VALUE, NUMBER_ONE } from "globals/constants";
 import { toast } from "react-toastify";
 import { addBook, updateBook } from "pages/bookList/_state/bookSlice";
 import { isISBNUnique } from "utils/functions/arrayObjectFunctions";
@@ -66,14 +61,14 @@ export const BookDialog: React.FC<BookDialogProps> = ({
     [dispatch, onClose],
   );
 
-  const formik = useFormik<Book>({
+  const formik = useFormik({
     initialValues: {
       title: previousBook.title || EMPTY_VALUE,
       author: previousBook.author || EMPTY_VALUE,
       category: previousBook.category || EMPTY_VALUE,
       isbn: previousBook.isbn || EMPTY_VALUE,
       totalCopies: previousBook.totalCopies || NUMBER_ONE,
-      availableCopies: previousBook.availableCopies || NUMBER_ZERO,
+      availableCopies: previousBook.availableCopies || NUMBER_ONE,
       id: previousBook.id,
     },
     validationSchema: bookValidationSchema,

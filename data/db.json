@@ -17,38 +17,36 @@
   ],
   "students": [
     {
-      "id": "88aa",
-      "name": "Aravinth",
-      "email": "aravinth.perumal@aspiresys.com",
-      "department": "EEE",
-      "booksBorrowed": []
-    },
-    {
+      "id": "6938",
       "name": "Akash K",
-      "email": "akash@kiot.in",
-      "department": "ECE",
-      "booksBorrowed": [],
-      "id": "6c4a"
+      "email": "leo@gmail.com",
+      "department": "EEE",
+      "booksBorrowed": [
+        "85d5"
+      ]
     }
   ],
   "books": [
     {
-      "title": "Java",
+      "id": "85d5",
+      "title": "React",
       "author": "Eric Lehman",
-      "category": "Education",
-      "isbn": "9780262033840",
+      "category": "IT",
+      "isbn": "9780262033848",
       "totalCopies": 2,
-      "availableCopies": 1,
-      "id": "c4b9"
-    },
+      "availableCopies": 1
+    }
+  ],
+  "transactions": [
     {
-      "id": "4743",
-      "title": "Automation",
-      "author": "Aron",
-      "category": "AI",
-      "isbn": "9780134105101",
-      "totalCopies": 1,
-      "availableCopies": 0
+      "id": "cd7b",
+      "studentId": "6938",
+      "bookId": "85d5",
+      "issueDate": "2025-02-28",
+      "dueDate": "2025-03-02",
+      "returnDate": null,
+      "status": "issued",
+      "penalty": 0
     }
   ]
 }

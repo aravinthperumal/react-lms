@@ -2,7 +2,7 @@ import React, { KeyboardEvent } from "react";
 import { ErrorMessage, StyledInput } from "./Input.sc";
 
 interface InputProps {
-  type?: "text" | "password" | "email" | "number";
+  type?: "text" | "password" | "email" | "number" | "date";
   placeholder?: string;
   value: string | number;
   name: string;

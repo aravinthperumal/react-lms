@@ -2,6 +2,7 @@ import axios from "axios";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { Book, BookState } from "./types";
 import { baseURL } from "globals/server";
+import { RootState } from "_state/store";
 
 const initialState: BookState = {
   bookList: [],
@@ -40,6 +41,28 @@ export const deleteBook = createAsyncThunk(
   async (bookId: string) => {
     await axios.delete(`${baseURL}/books/${bookId}`);
     return bookId;
+  },
+);
+
+export const updateBookCopies = createAsyncThunk(
+  "books/updateCopies",
+  async (
+    { bookId, change }: { bookId: string; change: number },
+    { dispatch, getState },
+  ) => {
+    const state = getState() as RootState;
+    const bookList = state.book.bookList;
+
+    const book = bookList.find((b) => b.id === bookId);
+    if (!book) throw new Error("Book not found");
+
+    const updatedBook = {
+      ...book,
+      availableCopies: book.availableCopies + change,
+    };
+
+    await dispatch(updateBook(updatedBook));
+    return updatedBook;
   },
 );
 
@@ -87,6 +110,15 @@ const bookSlice = createSlice({
           (book) => book.id !== action.payload,
         );
       });
+    builder.addCase(updateBookCopies.fulfilled, (state, action) => {
+      state.isLoading = false;
+      const index = state.bookList.findIndex(
+        (book) => book.id === action.payload.id,
+      );
+      if (index !== -1) {
+        state.bookList[index] = action.payload;
+      }
+    });
   },
 });
 

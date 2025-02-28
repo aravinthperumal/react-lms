@@ -1,4 +1,5 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
+import { bookTransaction } from "pages/_state/bookTransactionSlice";
 import { book } from "pages/bookList/_state/bookSlice";
 import { user } from "pages/login/_state/userSlice";
 import { student } from "pages/studentList/_state/studentSlice";
@@ -7,6 +8,7 @@ const rootReducer = combineReducers({
   user,
   student,
   book,
+  bookTransaction,
 });
 export const store = configureStore({
   reducer: rootReducer,
