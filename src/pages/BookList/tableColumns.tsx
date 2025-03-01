@@ -1,7 +1,8 @@
-import { Column } from "pages/components/table/Table";
-import { Book } from "./_state/types";
-import { TableButtonWrapper } from "pages/studentList/components/StudentDialog/StudentDialog.sc";
 import Button from "pages/components/button/Button";
+import { Column } from "pages/components/table/Table";
+import { TableButtonWrapper } from "pages/studentList/components/StudentDialog/StudentDialog.sc";
+
+import { Book } from "./_state/types";
 
 export interface ExtendedBook extends Book {
   actions?: string; //for button action accessor to avoid list key error

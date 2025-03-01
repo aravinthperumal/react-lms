@@ -1,10 +1,10 @@
 // StudentList.test.tsx
-import axios from "axios";
 import { screen, waitFor } from "@testing-library/react";
-import { renderWithProviders } from "utils/test-utils";
 import { setupStore } from "_state/store";
+import axios from "axios";
 import { StudentList } from "pages/studentList/StudentList";
 import { studentData } from "test/__mocks__/studenListMock";
+import { renderWithProviders } from "utils/test-utils";
 
 jest.mock("axios");
 const mockedAxios = axios as jest.Mocked<typeof axios>;

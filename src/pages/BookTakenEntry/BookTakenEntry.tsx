@@ -1,23 +1,24 @@
 import { useDispatch } from "_state/useDispatch";
 import { useSelector } from "_state/useSelector";
-import { fetchBooks } from "pages/bookList/_state/bookSlice";
-import { fetchStudents } from "pages/studentList/_state/studentSlice";
-import { useCallback, useEffect, useMemo, useState } from "react";
-import { Error, FormContainer, Label } from "./BookTakenEntry.sc";
-import { Dropdown } from "pages/components/dropdown/Dropdowm";
-import { selectOptions } from "utils/functions/arrayObjectFunctions";
 import { useFormik } from "formik";
-import { validationSchema } from "./validationSchema";
 import {
   BOOK_ISSUED,
   EMPTY_VALUE,
   MAX_BOOK_LIMIT,
   NUMBER_ZERO,
 } from "globals/constants";
-import Input from "pages/components/input/Input";
-import Button from "pages/components/button/Button";
 import { issueBook } from "pages/_state/bookTransactionSlice";
+import { fetchBooks } from "pages/bookList/_state/bookSlice";
+import Button from "pages/components/button/Button";
+import { Dropdown } from "pages/components/dropdown/Dropdowm";
+import Input from "pages/components/input/Input";
+import { fetchStudents } from "pages/studentList/_state/studentSlice";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { toast } from "react-toastify";
+import { selectOptions } from "utils/functions/arrayObjectFunctions";
+
+import { Error, FormContainer, Label } from "./BookTakenEntry.sc";
+import { validationSchema } from "./validationSchema";
 
 interface FormFields {
   bookId: string;
@@ -131,8 +132,8 @@ export const BookTakenEntry: React.FC = () => {
         onChange={formik.handleChange}
         value={formik.values.dueDate}
       />
-      {formik.touched.returnDate && formik.errors.returnDate && (
-        <Error>{formik.errors.returnDate}</Error>
+      {formik.touched.dueDate && formik.errors.dueDate && (
+        <Error>{formik.errors.dueDate}</Error>
       )}
 
       {errors && errors.map((error, i) => <Error key={i}>{error}</Error>)}

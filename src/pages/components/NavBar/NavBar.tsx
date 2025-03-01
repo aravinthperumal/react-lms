@@ -1,7 +1,12 @@
+import { useDispatch } from "_state/useDispatch";
+import { useSelector } from "_state/useSelector";
+import { LOCALSTORAGE_USER_ROLE } from "globals/constants";
+import { logOut } from "pages/login/_state/userSlice";
 import { useCallback, useState } from "react";
 import { useNavigate } from "react-router";
-import { useDispatch } from "_state/useDispatch";
-import { LOCALSTORAGE_USER_ROLE } from "globals/constants";
+import { removeFromLocalStorage } from "utils/localStorage/localStorage";
+
+import { menuItems } from "./menuItems";
 import {
   LogOutButton,
   StyledHamburger,
@@ -10,10 +15,6 @@ import {
   StyledMenuLink,
   StyledNavBar,
 } from "./NavBar.sc";
-import { menuItems } from "./menuItems";
-import { logOut } from "pages/login/_state/userSlice";
-import { useSelector } from "_state/useSelector";
-import { removeFromLocalStorage } from "utils/localStorage/localStorage";
 
 export const NavBar: React.FC = () => {
   const { name } = useSelector(({ user }) => user.user);

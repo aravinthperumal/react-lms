@@ -1,8 +1,9 @@
-import axios from "axios";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { baseURL } from "globals/server";
-import { Student, StudentState } from "./types";
 import { RootState } from "_state/store";
+import axios from "axios";
+import { baseURL } from "globals/server";
+
+import { Student, StudentState } from "./types";
 
 const initialState: StudentState = {
   studentList: [],

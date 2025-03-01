@@ -1,4 +1,5 @@
 import { renderWithProviders, screen } from "utils/test-utils";
+
 import { NavBar } from "./NavBar";
 
 describe("NavBar", () => {

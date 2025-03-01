@@ -1,9 +1,10 @@
-import axios from "axios";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import axios from "axios";
 import { baseURL } from "globals/server";
-import { BootTransaction, BootTransactionState } from "./types";
-import { borrowBook } from "pages/studentList/_state/studentSlice";
 import { updateBookCopies } from "pages/bookList/_state/bookSlice";
+import { borrowBook } from "pages/studentList/_state/studentSlice";
+
+import { BootTransaction, BootTransactionState } from "./types";
 
 const initialState: BootTransactionState = {
   transaction: [],

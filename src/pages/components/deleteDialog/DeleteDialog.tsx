@@ -1,11 +1,12 @@
 import Button from "pages/components/button/Button";
+import React, { useCallback } from "react";
+
 import {
   ButtonWrapper,
   CloseButton,
   FormContainer,
   Label,
 } from "./DeleteDialog.sc";
-import React, { useCallback } from "react";
 
 interface DeleteDialogProps {
   onClose: () => void;

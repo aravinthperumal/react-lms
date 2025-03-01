@@ -1,5 +1,6 @@
-import Button from "./Button";
 import { fireEvent, renderWithProviders, screen } from "utils/test-utils";
+
+import Button from "./Button";
 
 describe("Button", () => {
   it("render the button with the text", () => {

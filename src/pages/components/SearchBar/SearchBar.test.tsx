@@ -1,4 +1,5 @@
 import { fireEvent, renderWithProviders, screen } from "utils/test-utils";
+
 import SearchBar from "./SearchBar";
 
 describe("Search bar", () => {

@@ -1,19 +1,20 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
-import { useSearchParams } from "react-router-dom";
-import { useSelector } from "_state/useSelector";
 import { useDispatch } from "_state/useDispatch";
-import { fetchStudents } from "./_state/studentSlice";
-import { Student } from "./_state/types";
+import { useSelector } from "_state/useSelector";
 import { EDIT_MODE } from "globals/constants";
-import Table from "pages/components/table/Table";
-import SearchBar, { FilterDef } from "pages/components/searchBar/SearchBar";
-import PanelHeader from "pages/components/panelHeader/PanelHeader";
 import Button from "pages/components/button/Button";
 import Modal from "pages/components/modal/Modal";
-import { StudentDialog } from "./components/StudentDialog/StudentDialog";
-import { DeleteStudentDialog } from "./components/DeleteStudentDialog/DeleteStudentDialog";
-import { studentColumns } from "./tableColumns";
+import PanelHeader from "pages/components/panelHeader/PanelHeader";
+import SearchBar, { FilterDef } from "pages/components/searchBar/SearchBar";
+import Table from "pages/components/table/Table";
+import { useCallback, useEffect, useMemo, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import { toast } from "react-toastify";
+
+import { fetchStudents } from "./_state/studentSlice";
+import { Student } from "./_state/types";
+import { DeleteStudentDialog } from "./components/DeleteStudentDialog/DeleteStudentDialog";
+import { StudentDialog } from "./components/StudentDialog/StudentDialog";
+import { studentColumns } from "./tableColumns";
 
 const filters: FilterDef[] = [
   { key: "name", placeholder: "Search by name" },

@@ -1,6 +1,7 @@
 import { renderWithProviders, screen } from "utils/test-utils";
-import { NotFoundPage } from "./NotFoundPage";
 import { User } from "utils/types";
+
+import { NotFoundPage } from "./NotFoundPage";
 
 describe("Page not found", () => {
   it('Display "Go to Home" link when user is logged in', () => {

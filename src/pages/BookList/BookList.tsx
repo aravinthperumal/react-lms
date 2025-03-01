@@ -1,20 +1,21 @@
-import { useSearchParams } from "react-router-dom";
-import SearchBar, { FilterDef } from "pages/components/searchBar/SearchBar";
 import { useDispatch } from "_state/useDispatch";
 import { useSelector } from "_state/useSelector";
+import { ADMIN, EDIT_MODE, LOCALSTORAGE_USER_ROLE } from "globals/constants";
+import Button from "pages/components/button/Button";
+import Modal from "pages/components/modal/Modal";
+import PanelHeader from "pages/components/panelHeader/PanelHeader";
+import SearchBar, { FilterDef } from "pages/components/searchBar/SearchBar";
 import Table from "pages/components/table/Table";
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { fetchBooks } from "./_state/bookSlice";
-import { bookColumns } from "./tableColumns";
-import Modal from "pages/components/modal/Modal";
-import { Book } from "./_state/types";
+import { useSearchParams } from "react-router-dom";
 import { toast } from "react-toastify";
-import { DeleteBookDialog } from "./components/DeleteBookDialog/DeleteBookDialog";
-import { ADMIN, EDIT_MODE, LOCALSTORAGE_USER_ROLE } from "globals/constants";
 import { getFromLocalStorage } from "utils/localStorage/localStorage";
-import PanelHeader from "pages/components/panelHeader/PanelHeader";
-import Button from "pages/components/button/Button";
+
+import { fetchBooks } from "./_state/bookSlice";
+import { Book } from "./_state/types";
 import { BookDialog } from "./components/BookDialog/BookDialog";
+import { DeleteBookDialog } from "./components/DeleteBookDialog/DeleteBookDialog";
+import { bookColumns } from "./tableColumns";
 
 const filters: FilterDef[] = [
   { key: "title", placeholder: "Search by title" },

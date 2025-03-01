@@ -1,4 +1,6 @@
+import { NUMBER_ZERO } from "globals/constants";
 import { useState } from "react";
+
 import {
   LoadingWrapper,
   NoDataWrapper,
@@ -10,7 +12,6 @@ import {
   StyledTh,
   StyledTr,
 } from "./Table.sc";
-import { NUMBER_ZERO } from "globals/constants";
 
 export interface Column<T> {
   id: keyof T;

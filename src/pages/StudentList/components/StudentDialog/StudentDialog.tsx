@@ -1,7 +1,17 @@
-import React, { useCallback, useState } from "react";
-import { Student } from "../../_state/types";
-import { EDIT_MODE, EMPTY_LIST, EMPTY_VALUE } from "globals/constants";
+import { useDispatch } from "_state/useDispatch";
 import { useFormik } from "formik";
+import { EDIT_MODE, EMPTY_LIST, EMPTY_VALUE } from "globals/constants";
+import Button from "pages/components/button/Button";
+import Input from "pages/components/input/Input";
+import {
+  addStudent,
+  updateStudent,
+} from "pages/studentList/_state/studentSlice";
+import { Student } from "pages/studentList/_state/types";
+import React, { useCallback, useState } from "react";
+import { toast } from "react-toastify";
+import { checkIfStudentExists } from "utils/functions/arrayObjectFunctions";
+
 import {
   ButtonWrapper,
   CloseButton,
@@ -9,13 +19,7 @@ import {
   FormContainer,
   Label,
 } from "./StudentDialog.sc";
-import Button from "pages/components/button/Button";
-import Input from "pages/components/input/Input";
 import { validationSchema } from "./validationSchema";
-import { addStudent, updateStudent } from "../../_state/studentSlice";
-import { useDispatch } from "_state/useDispatch";
-import { checkIfStudentExists } from "utils/functions/arrayObjectFunctions";
-import { toast } from "react-toastify";
 
 interface StudentDialogProps {
   studentList: Student[];
@@ -63,15 +67,15 @@ export const StudentDialog: React.FC<StudentDialogProps> = ({
 
   const formik = useFormik<Student>({
     initialValues: {
-      name: previousStudent.name || EMPTY_VALUE,
-      email: previousStudent.email || EMPTY_VALUE,
-      department: previousStudent.department || EMPTY_VALUE,
-      booksBorrowed: previousStudent.booksBorrowed || EMPTY_LIST,
+      name: previousStudent.name ?? EMPTY_VALUE,
+      email: previousStudent.email ?? EMPTY_VALUE,
+      department: previousStudent.department ?? EMPTY_VALUE,
+      booksBorrowed: previousStudent.booksBorrowed ?? EMPTY_LIST,
       id: previousStudent.id,
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      setError("");
+      setError(EMPTY_VALUE);
       return isAddMode ? handleAddCallback(values) : handleEditCallback(values);
     },
   });

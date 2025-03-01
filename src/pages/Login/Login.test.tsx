@@ -1,7 +1,7 @@
 import { screen, fireEvent, waitFor } from "@testing-library/react";
-import { renderWithProviders } from "utils/test-utils";
 import Login from "pages/login/Login";
 import { fetchUserData } from "utils/api";
+import { renderWithProviders } from "utils/test-utils";
 
 jest.mock("utils/api", () => ({
   fetchUserData: jest.fn(),

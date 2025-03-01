@@ -1,30 +1,23 @@
-import React, { useCallback, useState } from "react";
-import { useFormik } from "formik";
-import { bookValidationSchema } from "./validationSchema";
 import { useDispatch } from "_state/useDispatch";
+import { useFormik } from "formik";
+import { EDIT_MODE, EMPTY_VALUE, NUMBER_ONE } from "globals/constants";
+import { addBook, updateBook } from "pages/bookList/_state/bookSlice";
+import { Book } from "pages/bookList/_state/types";
+import Button from "pages/components/button/Button";
+import Input from "pages/components/input/Input";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
+import { toast } from "react-toastify";
+import { isISBNUnique } from "utils/functions/arrayObjectFunctions";
+
 import {
   ButtonWrapper,
   CloseButton,
   Error,
   FormContainer,
+  Info,
   Label,
 } from "./BookDialog.sc";
-import Button from "pages/components/button/Button";
-import Input from "pages/components/input/Input";
-import { EDIT_MODE, EMPTY_VALUE, NUMBER_ONE } from "globals/constants";
-import { toast } from "react-toastify";
-import { addBook, updateBook } from "pages/bookList/_state/bookSlice";
-import { isISBNUnique } from "utils/functions/arrayObjectFunctions";
-
-interface Book {
-  id: string;
-  title: string;
-  author: string;
-  category: string;
-  isbn: string;
-  totalCopies: number;
-  availableCopies: number;
-}
+import { bookValidationSchema } from "./validationSchema";
 
 interface BookDialogProps {
   bookList: Book[];
@@ -42,6 +35,9 @@ export const BookDialog: React.FC<BookDialogProps> = ({
   const dispatch = useDispatch();
   const isAddMode = editMode === EDIT_MODE.ADD;
   const [error, setError] = useState<string>("");
+  const [prevTotalCopies, setPrevTotalCopies] = useState(
+    previousBook.totalCopies,
+  );
 
   const handleAddCallback = useCallback(
     (data: Book) => {
@@ -61,17 +57,26 @@ export const BookDialog: React.FC<BookDialogProps> = ({
     [dispatch, onClose],
   );
 
+  // to manage total copies decrement limit in edit mode based on previous total and available copies
+  const totalCopiesLimit = useMemo(
+    () =>
+      isAddMode
+        ? NUMBER_ONE
+        : previousBook.totalCopies - previousBook.availableCopies,
+    [isAddMode, previousBook.availableCopies, previousBook.totalCopies],
+  );
+
   const formik = useFormik({
     initialValues: {
-      title: previousBook.title || EMPTY_VALUE,
-      author: previousBook.author || EMPTY_VALUE,
-      category: previousBook.category || EMPTY_VALUE,
-      isbn: previousBook.isbn || EMPTY_VALUE,
-      totalCopies: previousBook.totalCopies || NUMBER_ONE,
-      availableCopies: previousBook.availableCopies || NUMBER_ONE,
+      title: previousBook.title ?? EMPTY_VALUE,
+      author: previousBook.author ?? EMPTY_VALUE,
+      category: previousBook.category ?? EMPTY_VALUE,
+      isbn: previousBook.isbn ?? EMPTY_VALUE,
+      totalCopies: previousBook.totalCopies ?? NUMBER_ONE,
+      availableCopies: previousBook.availableCopies ?? NUMBER_ONE,
       id: previousBook.id,
     },
-    validationSchema: bookValidationSchema,
+    validationSchema: bookValidationSchema(totalCopiesLimit),
     onSubmit: (values) => {
       setError("");
       if (isAddMode && !isISBNUnique(bookList, values.isbn)) {
@@ -81,6 +86,24 @@ export const BookDialog: React.FC<BookDialogProps> = ({
       return isAddMode ? handleAddCallback(values) : handleEditCallback(values);
     },
   });
+
+  useEffect(() => {
+    if (isAddMode) {
+      formik.setFieldValue("availableCopies", formik.values.totalCopies);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [formik.values.totalCopies, isAddMode]); //it should be only affected when total copies changed
+
+  useEffect(() => {
+    const diff = formik.values.totalCopies - prevTotalCopies;
+    if (!isAddMode && diff !== 0) {
+      const newAvailableCopies = formik.values.availableCopies + diff;
+      formik.setFieldValue("availableCopies", newAvailableCopies);
+    }
+
+    // Update to current totalCopies after changed
+    setPrevTotalCopies(formik.values.totalCopies);
+  }, [formik.values.totalCopies, isAddMode, formik, prevTotalCopies]);
 
   return (
     <FormContainer onSubmit={formik.handleSubmit}>
@@ -147,6 +170,7 @@ export const BookDialog: React.FC<BookDialogProps> = ({
       <Input
         name={"availableCopies"}
         type="number"
+        isDisabled
         value={formik.values.availableCopies}
         onChange={formik.handleChange}
       />
@@ -160,6 +184,9 @@ export const BookDialog: React.FC<BookDialogProps> = ({
         <Button type="submit">{isAddMode ? "Add" : "Save"}</Button>
       </ButtonWrapper>
       {error && <Error>{error}</Error>}
+      {!isAddMode && (
+        <Info>{`Total number of book copies already in use ${totalCopiesLimit}`}</Info>
+      )}
     </FormContainer>
   );
 };

@@ -1,9 +1,10 @@
-import React, { useCallback } from "react";
-import { Student } from "../../_state/types";
 import { useDispatch } from "_state/useDispatch";
-import { deleteStudent } from "pages/studentList/_state/studentSlice";
-import { toast } from "react-toastify";
 import DeleteDialog from "pages/components/deleteDialog/DeleteDialog";
+import { deleteStudent } from "pages/studentList/_state/studentSlice";
+import React, { useCallback } from "react";
+import { toast } from "react-toastify";
+
+import { Student } from "../../_state/types";
 
 interface StudentDialogProps {
   selectedStudent: Student;

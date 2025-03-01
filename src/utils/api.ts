@@ -1,6 +1,7 @@
 import axios from "axios";
-import { User } from "./types";
 import { baseURL } from "globals/server";
+
+import { User } from "./types";
 
 export const fetchUserData = async (
   username: string,

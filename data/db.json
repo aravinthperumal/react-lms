@@ -22,19 +22,30 @@
       "email": "leo@gmail.com",
       "department": "EEE",
       "booksBorrowed": [
-        "85d5"
+        "85d5",
+        "dbd1",
+        "dbd1"
       ]
     }
   ],
   "books": [
     {
-      "id": "85d5",
       "title": "React",
       "author": "Eric Lehman",
       "category": "IT",
       "isbn": "9780262033848",
-      "totalCopies": 2,
-      "availableCopies": 1
+      "totalCopies": 1,
+      "availableCopies": 0,
+      "id": "85d5"
+    },
+    {
+      "title": "Javascript",
+      "author": "Martin",
+      "category": "IT",
+      "isbn": "9780134105456",
+      "totalCopies": 3,
+      "availableCopies": 1,
+      "id": "dbd1"
     }
   ],
   "transactions": [
@@ -44,6 +55,26 @@
       "bookId": "85d5",
       "issueDate": "2025-02-28",
       "dueDate": "2025-03-02",
+      "returnDate": null,
+      "status": "issued",
+      "penalty": 0
+    },
+    {
+      "id": "3b8f",
+      "studentId": "6938",
+      "bookId": "dbd1",
+      "issueDate": "2025-03-01",
+      "dueDate": "2025-03-09",
+      "returnDate": null,
+      "status": "issued",
+      "penalty": 0
+    },
+    {
+      "id": "c93c",
+      "studentId": "6938",
+      "bookId": "dbd1",
+      "issueDate": "2025-03-01",
+      "dueDate": "2025-03-08",
       "returnDate": null,
       "status": "issued",
       "penalty": 0

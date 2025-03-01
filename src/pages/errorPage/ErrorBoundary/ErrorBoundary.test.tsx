@@ -1,4 +1,5 @@
 import { renderWithProviders, screen } from "utils/test-utils";
+
 import { ErrorBoundaryCard } from "./ErrorBoundaryCard";
 
 describe("Render Error Boundary", () => {

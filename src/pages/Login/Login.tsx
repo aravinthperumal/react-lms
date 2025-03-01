@@ -1,6 +1,15 @@
+import { useDispatch } from "_state/useDispatch";
+import { LOCALSTORAGE_USER_ROLE } from "globals/constants";
+import Input from "pages/components/input/Input";
 import React, { useCallback, useMemo, useState } from "react";
 import { useNavigate } from "react-router";
-import { LOCALSTORAGE_USER_ROLE } from "globals/constants";
+import { toast } from "react-toastify";
+import { fetchUserData } from "utils/api";
+import { isEnterKey } from "utils/functions/keyboardFunctions";
+import { isEmpty, isValidEmail } from "utils/functions/validationFunctions";
+import { setToLocalStorage } from "utils/localStorage/localStorage";
+
+import { login } from "./_state/userSlice";
 import {
   ErrorText,
   LoginCardWrapper,
@@ -8,14 +17,6 @@ import {
   LoginTitle,
   SubmitButton,
 } from "./Login.sc";
-import { fetchUserData } from "utils/api";
-import { isEmpty, isValidEmail } from "utils/functions/validationFunctions";
-import { isEnterKey } from "utils/functions/keyboardFunctions";
-import Input from "pages/components/input/Input";
-import { useDispatch } from "_state/useDispatch";
-import { setToLocalStorage } from "utils/localStorage/localStorage";
-import { login } from "./_state/userSlice";
-import { toast } from "react-toastify";
 
 const Login: React.FC = () => {
   const dispatch = useDispatch();

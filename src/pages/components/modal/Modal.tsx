@@ -1,6 +1,7 @@
 import { createPortal } from "react-dom";
-import { ModalContent, ModalOverlay } from "./Modal.sc";
 import { DialogSize } from "utils/types";
+
+import { ModalContent, ModalOverlay } from "./Modal.sc";
 
 interface ModalProps {
   isOpen: boolean;

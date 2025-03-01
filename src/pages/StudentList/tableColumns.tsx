@@ -1,6 +1,7 @@
-import { Column } from "pages/components/table/Table";
-import { Student } from "./_state/types";
 import Button from "pages/components/button/Button";
+import { Column } from "pages/components/table/Table";
+
+import { Student } from "./_state/types";
 import { TableButtonWrapper } from "./components/StudentDialog/StudentDialog.sc";
 
 export interface ExtendedStudent extends Student {

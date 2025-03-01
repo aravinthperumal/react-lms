@@ -1,5 +1,6 @@
-import { Navigate } from "react-router";
 import { useSelector } from "_state/useSelector";
+import { Navigate } from "react-router";
+
 import { BasePageLayout } from "./BasePageLayout";
 
 export const Protected: React.FC = () => {

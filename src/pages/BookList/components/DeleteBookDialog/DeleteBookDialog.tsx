@@ -1,9 +1,10 @@
-import React, { useCallback } from "react";
-import { Book } from "../../_state/types";
 import { useDispatch } from "_state/useDispatch";
-import { toast } from "react-toastify";
-import DeleteDialog from "pages/components/deleteDialog/DeleteDialog";
 import { deleteBook } from "pages/bookList/_state/bookSlice";
+import DeleteDialog from "pages/components/deleteDialog/DeleteDialog";
+import React, { useCallback } from "react";
+import { toast } from "react-toastify";
+
+import { Book } from "../../_state/types";
 
 interface DeleteBookDialogProps {
   selectedBook: Book;
