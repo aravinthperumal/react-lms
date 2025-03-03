@@ -1,6 +1,6 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import { bookTransaction } from "pages/_state/bookTransactionSlice";
 import { book } from "pages/bookList/_state/bookSlice";
+import { bookTransaction } from "pages/bookReturnEntry/_state/bookTransactionSlice";
 import { user } from "pages/login/_state/userSlice";
 import { student } from "pages/studentList/_state/studentSlice";
 

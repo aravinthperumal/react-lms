@@ -1,8 +1,8 @@
 import Button from "pages/components/button/Button";
+import { TableButtonWrapper } from "pages/components/formWrapper/FormWrapper.sc";
 import { Column } from "pages/components/table/Table";
 
 import { Student } from "./_state/types";
-import { TableButtonWrapper } from "./components/StudentDialog/StudentDialog.sc";
 
 export interface ExtendedStudent extends Student {
   actions?: string; //for button action accessor to avoid list key error

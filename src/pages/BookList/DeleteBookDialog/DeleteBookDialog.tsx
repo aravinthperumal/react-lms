@@ -4,7 +4,7 @@ import DeleteDialog from "pages/components/deleteDialog/DeleteDialog";
 import React, { useCallback } from "react";
 import { toast } from "react-toastify";
 
-import { Book } from "../../_state/types";
+import { Book } from "../_state/types";
 
 interface DeleteBookDialogProps {
   selectedBook: Book;

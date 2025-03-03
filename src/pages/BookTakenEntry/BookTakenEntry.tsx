@@ -7,28 +7,26 @@ import {
   MAX_BOOK_LIMIT,
   NUMBER_ZERO,
 } from "globals/constants";
-import { issueBook } from "pages/_state/bookTransactionSlice";
 import { fetchBooks } from "pages/bookList/_state/bookSlice";
+import { issueBook } from "pages/bookReturnEntry/_state/bookTransactionSlice";
+import { BookTransaction } from "pages/bookReturnEntry/_state/types";
 import Button from "pages/components/button/Button";
-import { Dropdown } from "pages/components/dropdown/Dropdowm";
+import { Dropdown } from "pages/components/dropdown/Dropdown";
+import {
+  Error,
+  FormContainer,
+  Label,
+} from "pages/components/formWrapper/FormWrapper.sc";
 import Input from "pages/components/input/Input";
 import { fetchStudents } from "pages/studentList/_state/studentSlice";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { toast } from "react-toastify";
-import { selectOptions } from "utils/functions/arrayObjectFunctions";
+import { selectOptions, todayDate } from "utils/functions/arrayObjectFunctions";
 
-import { Error, FormContainer, Label } from "./BookTakenEntry.sc";
 import { validationSchema } from "./validationSchema";
 
-interface FormFields {
-  bookId: string;
-  studentId: string;
-  issueDate: string;
-  dueDate: string;
-  returnDate: string | null;
-  penalty: number;
-  status: string;
-}
+type FormFields = Omit<BookTransaction, "id">;
+
 export const BookTakenEntry: React.FC = () => {
   const dispatch = useDispatch();
   const { bookList } = useSelector((state) => state.book);
@@ -59,8 +57,10 @@ export const BookTakenEntry: React.FC = () => {
   const formik = useFormik<FormFields>({
     initialValues: {
       studentId: EMPTY_VALUE,
+      studentName: EMPTY_VALUE,
       bookId: EMPTY_VALUE,
-      issueDate: new Date().toISOString().split("T")[0],
+      bookName: EMPTY_VALUE,
+      issueDate: todayDate(),
       dueDate: EMPTY_VALUE,
       returnDate: null,
       status: BOOK_ISSUED,
@@ -86,7 +86,11 @@ export const BookTakenEntry: React.FC = () => {
         setErrors(errors);
         return;
       }
-      handleSubmit(values);
+      handleSubmit({
+        ...values,
+        bookName: book?.title ?? EMPTY_VALUE,
+        studentName: student?.name ?? EMPTY_VALUE,
+      });
       resetForm();
       toast.info("Book issued successfully");
     },

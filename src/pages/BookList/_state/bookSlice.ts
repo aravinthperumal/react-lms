@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { RootState } from "_state/store";
 import axios from "axios";
+import { MINUS_ONE } from "globals/constants";
 import { baseURL } from "globals/server";
 
 import { Book, BookState } from "./types";
@@ -51,17 +52,21 @@ export const updateBookCopies = createAsyncThunk(
     { bookId, change }: { bookId: string; change: number },
     { dispatch, getState },
   ) => {
-    const state = getState() as RootState;
-    const bookList = state.book.bookList;
+    let state = getState() as RootState;
+    let bookList = state.book.bookList;
+
+    if (!bookList || bookList.length === 0) {
+      await dispatch(fetchBooks({}));
+      state = getState() as RootState;
+      bookList = state.book.bookList;
+    }
 
     const book = bookList.find((b) => b.id === bookId);
     if (!book) throw new Error("Book not found");
-
     const updatedBook = {
       ...book,
       availableCopies: book.availableCopies + change,
     };
-
     await dispatch(updateBook(updatedBook));
     return updatedBook;
   },
@@ -97,7 +102,7 @@ const bookSlice = createSlice({
         const index = state.bookList.findIndex(
           (book) => book.id === action.payload.id,
         );
-        if (index !== -1) {
+        if (index !== MINUS_ONE) {
           state.bookList[index] = action.payload;
         }
       });
@@ -111,15 +116,19 @@ const bookSlice = createSlice({
           (book) => book.id !== action.payload,
         );
       });
-    builder.addCase(updateBookCopies.fulfilled, (state, action) => {
-      state.isLoading = false;
-      const index = state.bookList.findIndex(
-        (book) => book.id === action.payload.id,
-      );
-      if (index !== -1) {
-        state.bookList[index] = action.payload;
-      }
-    });
+    builder
+      .addCase(updateBookCopies.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(updateBookCopies.fulfilled, (state, action) => {
+        state.isLoading = false;
+        const index = state.bookList.findIndex(
+          (book) => book.id === action.payload.id,
+        );
+        if (index !== -1) {
+          state.bookList[index] = action.payload;
+        }
+      });
   },
 });
 

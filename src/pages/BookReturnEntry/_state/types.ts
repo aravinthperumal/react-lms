@@ -1,7 +1,9 @@
-export interface BootTransaction {
+export interface BookTransaction {
   id: string;
   bookId: string;
+  bookName: string;
   studentId: string;
+  studentName: string;
   issueDate: string;
   dueDate: string;
   returnDate: string | null;
@@ -9,7 +11,7 @@ export interface BootTransaction {
   status: string;
 }
 
-export interface BootTransactionState {
+export interface BookTransactionState {
   isLoading: boolean;
-  transaction: BootTransaction[];
+  transaction: BookTransaction[];
 }

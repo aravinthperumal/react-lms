@@ -5,78 +5,56 @@
       "name": "Kishore",
       "username": "lmsadmin@gmail.com",
       "password": "admin123",
-      "role": "admin"
+      "role": "ADMIN"
     },
     {
       "id": "2",
       "name": "Prakash",
       "username": "lmslibrarian@gmail.com",
       "password": "library123",
-      "role": "staff"
+      "role": "STAFF"
     }
   ],
   "students": [
     {
-      "id": "6938",
-      "name": "Akash K",
+      "id": "dfd4",
+      "name": "Aravinth",
+      "email": "aravinthkp02@gmail.com",
+      "department": "ECE",
+      "booksBorrowed": [
+        "799e"
+      ]
+    },
+    {
+      "id": "8237",
+      "name": "leo",
       "email": "leo@gmail.com",
       "department": "EEE",
-      "booksBorrowed": [
-        "85d5",
-        "dbd1",
-        "dbd1"
-      ]
+      "booksBorrowed": []
     }
   ],
   "books": [
     {
       "title": "React",
-      "author": "Eric Lehman",
+      "author": "Martin",
       "category": "IT",
       "isbn": "9780262033848",
       "totalCopies": 1,
       "availableCopies": 0,
-      "id": "85d5"
-    },
-    {
-      "title": "Javascript",
-      "author": "Martin",
-      "category": "IT",
-      "isbn": "9780134105456",
-      "totalCopies": 3,
-      "availableCopies": 1,
-      "id": "dbd1"
+      "id": "799e"
     }
   ],
   "transactions": [
     {
-      "id": "cd7b",
-      "studentId": "6938",
-      "bookId": "85d5",
-      "issueDate": "2025-02-28",
-      "dueDate": "2025-03-02",
+      "id": "abda",
+      "studentId": "dfd4",
+      "studentName": "Aravinth",
+      "bookId": "799e",
+      "bookName": "React",
+      "issueDate": "2025-03-03",
+      "dueDate": "2025-03-04",
       "returnDate": null,
-      "status": "issued",
-      "penalty": 0
-    },
-    {
-      "id": "3b8f",
-      "studentId": "6938",
-      "bookId": "dbd1",
-      "issueDate": "2025-03-01",
-      "dueDate": "2025-03-09",
-      "returnDate": null,
-      "status": "issued",
-      "penalty": 0
-    },
-    {
-      "id": "c93c",
-      "studentId": "6938",
-      "bookId": "dbd1",
-      "issueDate": "2025-03-01",
-      "dueDate": "2025-03-08",
-      "returnDate": null,
-      "status": "issued",
+      "status": "ISSUED",
       "penalty": 0
     }
   ]

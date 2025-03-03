@@ -2,6 +2,13 @@ import { useDispatch } from "_state/useDispatch";
 import { useFormik } from "formik";
 import { EDIT_MODE, EMPTY_LIST, EMPTY_VALUE } from "globals/constants";
 import Button from "pages/components/button/Button";
+import {
+  ButtonWrapper,
+  CloseButton,
+  Error,
+  FormContainer,
+  Label,
+} from "pages/components/formWrapper/FormWrapper.sc";
 import Input from "pages/components/input/Input";
 import {
   addStudent,
@@ -12,13 +19,6 @@ import React, { useCallback, useState } from "react";
 import { toast } from "react-toastify";
 import { checkIfStudentExists } from "utils/functions/arrayObjectFunctions";
 
-import {
-  ButtonWrapper,
-  CloseButton,
-  Error,
-  FormContainer,
-  Label,
-} from "./StudentDialog.sc";
 import { validationSchema } from "./validationSchema";
 
 interface StudentDialogProps {
@@ -80,8 +80,10 @@ export const StudentDialog: React.FC<StudentDialogProps> = ({
     },
   });
 
+  const { dirty, errors, touched, handleSubmit, handleChange, values } = formik;
+
   return (
-    <FormContainer onSubmit={formik.handleSubmit}>
+    <FormContainer onSubmit={handleSubmit}>
       <h2>{isAddMode ? "Add Student" : "Edit Student"}</h2>
       {!isAddMode && (
         <>
@@ -89,43 +91,33 @@ export const StudentDialog: React.FC<StudentDialogProps> = ({
           <Input
             isDisabled
             name={"id"}
-            value={formik.values.id.toString()}
-            onChange={formik.handleChange}
+            value={values.id}
+            onChange={handleChange}
           />
         </>
       )}
       <Label>Name</Label>
-      <Input
-        name={"name"}
-        value={formik.values.name}
-        onChange={formik.handleChange}
-      />
-      {formik.errors.name && formik.touched.name && (
-        <Error>{formik.errors.name}</Error>
-      )}
+      <Input name={"name"} value={values.name} onChange={handleChange} />
+      {errors.name && touched.name && <Error>{errors.name}</Error>}
       <Label>Email</Label>
-      <Input
-        name={"email"}
-        value={formik.values.email}
-        onChange={formik.handleChange}
-      />
-      {formik.errors.email && formik.touched.email && (
-        <Error>{formik.errors.email}</Error>
-      )}
+      <Input name={"email"} value={values.email} onChange={handleChange} />
+      {errors.email && touched.email && <Error>{errors.email}</Error>}
       <Label>Department</Label>
       <Input
         name={"department"}
-        value={formik.values.department}
-        onChange={formik.handleChange}
+        value={values.department}
+        onChange={handleChange}
       />
-      {formik.errors.department && formik.touched.department && (
-        <Error>{formik.errors.department}</Error>
+      {errors.department && touched.department && (
+        <Error>{errors.department}</Error>
       )}
       <ButtonWrapper>
         <CloseButton type="button" onClick={onClose}>
           Close
         </CloseButton>
-        <Button type="submit">{isAddMode ? "Add" : "Save"}</Button>
+        <Button disabled={!dirty} type="submit">
+          {isAddMode ? "Add" : "Save"}
+        </Button>
       </ButtonWrapper>
       {error && <Error>{error}</Error>}
     </FormContainer>

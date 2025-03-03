@@ -12,8 +12,8 @@ import { toast } from "react-toastify";
 
 import { fetchStudents } from "./_state/studentSlice";
 import { Student } from "./_state/types";
-import { DeleteStudentDialog } from "./components/DeleteStudentDialog/DeleteStudentDialog";
-import { StudentDialog } from "./components/StudentDialog/StudentDialog";
+import { DeleteStudentDialog } from "./DeleteStudentDialog/DeleteStudentDialog";
+import { StudentDialog } from "./StudentDialog/StudentDialog";
 import { studentColumns } from "./tableColumns";
 
 const filters: FilterDef[] = [

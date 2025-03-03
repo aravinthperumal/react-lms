@@ -1,6 +1,6 @@
 import { useDispatch } from "_state/useDispatch";
 import { useSelector } from "_state/useSelector";
-import { LOCALSTORAGE_USER_ROLE } from "globals/constants";
+import { LOCALSTORAGE_USER } from "globals/constants";
 import { logOut } from "pages/login/_state/userSlice";
 import { useCallback, useState } from "react";
 import { useNavigate } from "react-router";
@@ -28,7 +28,7 @@ export const NavBar: React.FC = () => {
   );
 
   const onLogOut = useCallback(() => {
-    removeFromLocalStorage(LOCALSTORAGE_USER_ROLE);
+    removeFromLocalStorage(LOCALSTORAGE_USER);
     dispatch(logOut());
     navigate("/login", { replace: true });
   }, [dispatch, navigate]);

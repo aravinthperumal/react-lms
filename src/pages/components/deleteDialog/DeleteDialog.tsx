@@ -6,7 +6,7 @@ import {
   CloseButton,
   FormContainer,
   Label,
-} from "./DeleteDialog.sc";
+} from "../formWrapper/FormWrapper.sc";
 
 interface DeleteDialogProps {
   onClose: () => void;

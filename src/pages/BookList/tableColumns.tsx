@@ -1,6 +1,6 @@
 import Button from "pages/components/button/Button";
+import { TableButtonWrapper } from "pages/components/formWrapper/FormWrapper.sc";
 import { Column } from "pages/components/table/Table";
-import { TableButtonWrapper } from "pages/studentList/components/StudentDialog/StudentDialog.sc";
 
 import { Book } from "./_state/types";
 

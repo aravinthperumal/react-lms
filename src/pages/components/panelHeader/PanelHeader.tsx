@@ -1,4 +1,3 @@
-// StyledHeader.tsx
 import React from "react";
 
 import { ButtonGroup, HeaderContainer, HeaderText } from "./PanelHeader.sc";

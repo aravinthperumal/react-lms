@@ -5,7 +5,6 @@ export const HeaderContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 16px;
-  background-color: #f5f5f5;
 `;
 
 export const HeaderText = styled.h2`

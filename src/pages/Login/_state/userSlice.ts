@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { LOCALSTORAGE_USER_ROLE } from "globals/constants";
+import { LOCALSTORAGE_USER } from "globals/constants";
 import { getFromLocalStorage } from "utils/localStorage/localStorage";
 import { User } from "utils/types";
 
@@ -8,8 +8,8 @@ interface LoginState {
   user: User;
 }
 const initialState: LoginState = {
-  isUserLoggedIn: Boolean(getFromLocalStorage(LOCALSTORAGE_USER_ROLE)),
-  user: {} as User,
+  isUserLoggedIn: Boolean(getFromLocalStorage(LOCALSTORAGE_USER)), //to update persisted data even in the page reload
+  user: getFromLocalStorage<User>(LOCALSTORAGE_USER) ?? ({} as User),
 };
 
 const userSlice = createSlice({

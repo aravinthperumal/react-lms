@@ -1,5 +1,5 @@
 import { useDispatch } from "_state/useDispatch";
-import { LOCALSTORAGE_USER_ROLE } from "globals/constants";
+import { LOCALSTORAGE_USER } from "globals/constants";
 import Input from "pages/components/input/Input";
 import React, { useCallback, useMemo, useState } from "react";
 import { useNavigate } from "react-router";
@@ -65,7 +65,7 @@ const Login: React.FC = () => {
       const data = await fetchUserData(username, password);
       if (data) {
         //persist the login detail for page refresh
-        setToLocalStorage(LOCALSTORAGE_USER_ROLE, data.role);
+        setToLocalStorage(LOCALSTORAGE_USER, data);
         dispatch(login({ user: data }));
         navigate("/", { replace: true });
       } else {

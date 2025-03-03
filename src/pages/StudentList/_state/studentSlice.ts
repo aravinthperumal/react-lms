@@ -79,6 +79,34 @@ export const borrowBook = createAsyncThunk(
   },
 );
 
+export const returnBorrowedBook = createAsyncThunk(
+  "students/returnBorrowedBook",
+  async (
+    {
+      studentId,
+      bookId,
+    }: {
+      studentId: string;
+      bookId: string;
+    },
+    { dispatch, getState },
+  ) => {
+    const state = getState() as RootState;
+    const studentList = state.student.studentList;
+
+    const student = studentList.find((s) => s.id === studentId);
+    if (!student) throw new Error("Student not found");
+
+    const updatedStudent = {
+      ...student,
+      booksBorrowed: student.booksBorrowed.filter((book) => book !== bookId),
+    };
+    await dispatch(updateStudent(updatedStudent));
+
+    return studentList.map((s) => (s.id === studentId ? updatedStudent : s));
+  },
+);
+
 const studentSlice = createSlice({
   initialState,
   name: "studentSlice",
@@ -123,10 +151,22 @@ const studentSlice = createSlice({
           (student) => student.id !== action.payload,
         );
       });
-    builder.addCase(borrowBook.fulfilled, (state, action) => {
-      state.isLoading = false;
-      state.studentList = action.payload;
-    });
+    builder
+      .addCase(borrowBook.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(borrowBook.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.studentList = action.payload;
+      });
+    builder
+      .addCase(returnBorrowedBook.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(returnBorrowedBook.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.studentList = action.payload;
+      });
   },
 });
 

@@ -1,6 +1,6 @@
 import { useDispatch } from "_state/useDispatch";
 import { useSelector } from "_state/useSelector";
-import { ADMIN, EDIT_MODE, LOCALSTORAGE_USER_ROLE } from "globals/constants";
+import { ADMIN, EDIT_MODE } from "globals/constants";
 import Button from "pages/components/button/Button";
 import Modal from "pages/components/modal/Modal";
 import PanelHeader from "pages/components/panelHeader/PanelHeader";
@@ -9,12 +9,11 @@ import Table from "pages/components/table/Table";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { toast } from "react-toastify";
-import { getFromLocalStorage } from "utils/localStorage/localStorage";
 
 import { fetchBooks } from "./_state/bookSlice";
 import { Book } from "./_state/types";
-import { BookDialog } from "./components/BookDialog/BookDialog";
-import { DeleteBookDialog } from "./components/DeleteBookDialog/DeleteBookDialog";
+import { BookDialog } from "./BookDialog/BookDialog";
+import { DeleteBookDialog } from "./DeleteBookDialog/DeleteBookDialog";
 import { bookColumns } from "./tableColumns";
 
 const filters: FilterDef[] = [
@@ -27,7 +26,8 @@ const filters: FilterDef[] = [
 export const BookList: React.FC = () => {
   const dispatch = useDispatch();
   const [searchParams] = useSearchParams();
-  const isAdmin = getFromLocalStorage(LOCALSTORAGE_USER_ROLE) === ADMIN;
+  const { user } = useSelector((state) => state.user);
+  const isAdmin = user.role === ADMIN;
   const { bookList, isLoading } = useSelector((state) => state.book);
   const [selectedBook, setSelectedBook] = useState<Book>({} as Book);
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
