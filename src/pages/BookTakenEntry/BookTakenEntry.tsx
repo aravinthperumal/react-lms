@@ -31,7 +31,7 @@ export const BookTakenEntry: React.FC = () => {
   const dispatch = useDispatch();
   const { bookList } = useSelector((state) => state.book);
   const { studentList } = useSelector((state) => state.student);
-  const [errors, setErrors] = useState<string[]>([]);
+  const [formErrors, setFormErrors] = useState<string[]>([]);
 
   useEffect(() => {
     dispatch(fetchBooks({}));
@@ -47,7 +47,7 @@ export const BookTakenEntry: React.FC = () => {
     [bookList],
   );
 
-  const handleSubmit = useCallback(
+  const onSubmit = useCallback(
     (values: FormFields) => {
       dispatch(issueBook(values));
     },
@@ -68,7 +68,7 @@ export const BookTakenEntry: React.FC = () => {
     },
     validationSchema: validationSchema,
     onSubmit: (values, { resetForm }) => {
-      setErrors([]);
+      setFormErrors([]);
       const errors: string[] = [];
       const student = studentList.find(
         (student) => student.id === values.studentId,
@@ -79,14 +79,14 @@ export const BookTakenEntry: React.FC = () => {
       if (book && book.availableCopies <= NUMBER_ZERO) {
         errors.push("Selected book is not available for borrowing.");
       }
-      if (student && student?.booksBorrowed.length >= MAX_BOOK_LIMIT) {
+      if (student && student.booksBorrowed.length >= MAX_BOOK_LIMIT) {
         errors.push("Student reached maximum book count");
       }
       if (errors.length > 0) {
-        setErrors(errors);
+        setFormErrors(errors);
         return;
       }
-      handleSubmit({
+      onSubmit({
         ...values,
         bookName: book?.title ?? EMPTY_VALUE,
         studentName: student?.name ?? EMPTY_VALUE,
@@ -96,51 +96,52 @@ export const BookTakenEntry: React.FC = () => {
     },
   });
 
+  const { handleSubmit, handleChange, values, touched, errors } = formik;
+
   return (
-    <FormContainer onSubmit={formik.handleSubmit}>
+    <FormContainer onSubmit={handleSubmit}>
       <h2>{"Book Taken Entry"}</h2>
       <Label>Student</Label>
       <Dropdown
         name="studentId"
-        value={formik.values.studentId}
+        value={values.studentId}
         options={studentOptions}
-        onChange={formik.handleChange}
+        onChange={handleChange}
       />
-      {formik.touched.studentId && formik.errors.studentId && (
-        <Error>{formik.errors.studentId}</Error>
+      {touched.studentId && errors.studentId && (
+        <Error>{errors.studentId}</Error>
       )}
 
       <Label>Book</Label>
       <Dropdown
         name="bookId"
-        value={formik.values.bookId}
+        value={values.bookId}
         options={bookOptions}
-        onChange={formik.handleChange}
+        onChange={handleChange}
       />
-      {formik.touched.bookId && formik.errors.bookId && (
-        <Error>{formik.errors.bookId}</Error>
-      )}
+      {touched.bookId && errors.bookId && <Error>{errors.bookId}</Error>}
 
       <Label>Issue Date</Label>
       <Input
         name="issueDate"
         type="date"
+        placeholder="issueDate"
         onChange={formik.handleChange}
         value={formik.values.issueDate}
         isDisabled
       />
       <Label>Last Date To Return</Label>
       <Input
+        placeholder="dueDate"
         type="date"
         name="dueDate"
-        onChange={formik.handleChange}
-        value={formik.values.dueDate}
+        onChange={handleChange}
+        value={values.dueDate}
       />
-      {formik.touched.dueDate && formik.errors.dueDate && (
-        <Error>{formik.errors.dueDate}</Error>
-      )}
+      {touched.dueDate && errors.dueDate && <Error>{errors.dueDate}</Error>}
 
-      {errors && errors.map((error, i) => <Error key={i}>{error}</Error>)}
+      {formErrors &&
+        formErrors.map((error, i) => <Error key={i}>{error}</Error>)}
       <Button type="submit">Submit</Button>
     </FormContainer>
   );

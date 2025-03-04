@@ -1,4 +1,3 @@
-// StudentList.test.tsx
 import { screen, waitFor } from "@testing-library/react";
 import { setupStore } from "_state/store";
 import axios from "axios";

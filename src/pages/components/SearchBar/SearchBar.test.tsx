@@ -9,14 +9,14 @@ describe("Search bar", () => {
     renderWithProviders(<SearchBar filters={filters} />);
   });
 
-  it.skip("Should render search bar based on filters", () => {
+  it("Should render search bar based on filters", () => {
     filters.forEach((filter) => {
       const filterInput = screen.getByPlaceholderText(filter.placeholder);
       expect(filterInput).toBeInTheDocument();
     });
   });
 
-  it.skip("Should update filter search value based on user input", () => {
+  it("Should update filter search value based on user input", () => {
     const nameInput = screen.getByPlaceholderText("Search by name");
 
     fireEvent.change(nameInput, { target: { value: "test" } });

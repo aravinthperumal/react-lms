@@ -89,6 +89,7 @@ export const StudentDialog: React.FC<StudentDialogProps> = ({
         <>
           <Label>Id</Label>
           <Input
+            placeholder="id"
             isDisabled
             name={"id"}
             value={values.id}
@@ -97,13 +98,24 @@ export const StudentDialog: React.FC<StudentDialogProps> = ({
         </>
       )}
       <Label>Name</Label>
-      <Input name={"name"} value={values.name} onChange={handleChange} />
+      <Input
+        placeholder={"name"}
+        name={"name"}
+        value={values.name}
+        onChange={handleChange}
+      />
       {errors.name && touched.name && <Error>{errors.name}</Error>}
       <Label>Email</Label>
-      <Input name={"email"} value={values.email} onChange={handleChange} />
+      <Input
+        placeholder="email"
+        name={"email"}
+        value={values.email}
+        onChange={handleChange}
+      />
       {errors.email && touched.email && <Error>{errors.email}</Error>}
       <Label>Department</Label>
       <Input
+        placeholder="department"
         name={"department"}
         value={values.department}
         onChange={handleChange}

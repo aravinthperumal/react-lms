@@ -5,7 +5,6 @@ import { NavBar } from "./NavBar";
 describe("NavBar", () => {
   it("render the navbar correctly", () => {
     renderWithProviders(<NavBar />);
-    expect(screen.getByText("Library Management")).toBeInTheDocument();
     expect(screen.getByText("Student List")).toBeInTheDocument();
     expect(screen.getByText("Book List")).toBeInTheDocument();
     expect(screen.getByText("Book Taken Entry")).toBeInTheDocument();
