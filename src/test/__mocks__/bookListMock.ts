@@ -18,3 +18,13 @@ export const bookData = [
     availableCopies: 2,
   },
 ];
+
+export const previousBook = {
+  id: "LBOOK0001",
+  title: "Introduction to Algorithms",
+  author: "Thomas H. Cormen",
+  category: "Computer Science",
+  isbn: "9780262033848",
+  totalCopies: 5,
+  availableCopies: 3,
+};

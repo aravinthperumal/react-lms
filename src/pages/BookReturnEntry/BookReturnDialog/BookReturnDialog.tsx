@@ -32,8 +32,8 @@ export const BookReturnDialog: React.FC<BookReturnDialog> = ({
   const onSubmit = useCallback(
     (data: BookTransaction) => {
       dispatch(returnBook(data));
-      onClose();
       toast.info("Book return entry updated");
+      onClose();
     },
     [dispatch, onClose],
   );
@@ -63,6 +63,7 @@ export const BookReturnDialog: React.FC<BookReturnDialog> = ({
       <Input
         onChange={handleChange}
         isDisabled
+        placeholder="studentName"
         name={"studentName"}
         value={values.studentName}
       />
@@ -70,11 +71,13 @@ export const BookReturnDialog: React.FC<BookReturnDialog> = ({
       <Input
         onChange={handleChange}
         isDisabled
+        placeholder="bookName"
         name={"bookName"}
         value={values.bookName}
       />
       <Label>IssueDate Name</Label>
       <Input
+        placeholder="issueDate"
         type="date"
         onChange={handleChange}
         isDisabled
@@ -86,6 +89,7 @@ export const BookReturnDialog: React.FC<BookReturnDialog> = ({
         type="date"
         onChange={handleChange}
         isDisabled
+        placeholder="dueDate"
         name={"dueDate"}
         value={values.dueDate}
       />
@@ -94,6 +98,7 @@ export const BookReturnDialog: React.FC<BookReturnDialog> = ({
         type="date"
         onChange={handleChange}
         isDisabled
+        placeholder="returnDate"
         name={"returnDate"}
         value={values.returnDate || EMPTY_VALUE}
       />
@@ -101,9 +106,10 @@ export const BookReturnDialog: React.FC<BookReturnDialog> = ({
         <Label>Late Penalty</Label>
         <Input
           type="text"
+          placeholder="penalty"
           onChange={handleChange}
           isDisabled
-          name={"issueDate"}
+          name={"penalty"}
           value={values.penalty}
         />
       </>

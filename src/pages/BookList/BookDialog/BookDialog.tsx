@@ -130,6 +130,7 @@ export const BookDialog: React.FC<BookDialogProps> = ({
         <>
           <Label>Id</Label>
           <Input
+            placeholder="id"
             isDisabled
             name={"id"}
             value={values.id.toString()}
@@ -138,12 +139,18 @@ export const BookDialog: React.FC<BookDialogProps> = ({
         </>
       )}
       <Label>Title</Label>
-      <Input name={"title"} value={values.title} onChange={handleChange} />
+      <Input
+        placeholder="title"
+        name={"title"}
+        value={values.title}
+        onChange={handleChange}
+      />
       {formik.errors.title && formik.touched.title && (
         <Error>{formik.errors.title}</Error>
       )}
       <Label>Author</Label>
       <Input
+        placeholder="author"
         name={"author"}
         value={formik.values.author}
         onChange={formik.handleChange}
@@ -151,6 +158,7 @@ export const BookDialog: React.FC<BookDialogProps> = ({
       {errors.author && touched.author && <Error>{errors.author}</Error>}
       <Label>Category</Label>
       <Input
+        placeholder="category"
         name={"category"}
         value={values.category}
         onChange={handleChange}
@@ -158,6 +166,7 @@ export const BookDialog: React.FC<BookDialogProps> = ({
       {errors.category && touched.category && <Error>{errors.category}</Error>}
       <Label>ISBN</Label>
       <Input
+        placeholder="isbn"
         isDisabled={!isAddMode}
         name={"isbn"}
         value={values.isbn}
@@ -166,6 +175,7 @@ export const BookDialog: React.FC<BookDialogProps> = ({
       {errors.isbn && touched.isbn && <Error>{errors.isbn}</Error>}
       <Label>Total Copies</Label>
       <Input
+        placeholder="totalCopies"
         name={"totalCopies"}
         type="number"
         value={values.totalCopies}
@@ -176,6 +186,7 @@ export const BookDialog: React.FC<BookDialogProps> = ({
       )}
       <Label>Available Copies</Label>
       <Input
+        placeholder="availableCopies"
         name={"availableCopies"}
         type="number"
         isDisabled
