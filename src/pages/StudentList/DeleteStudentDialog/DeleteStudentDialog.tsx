@@ -1,33 +1,31 @@
-import { useDispatch } from "_state/useDispatch";
-import DeleteDialog from "pages/components/deleteDialog/DeleteDialog";
-import { deleteStudent } from "pages/studentList/_state/studentSlice";
-import React, { useCallback } from "react";
-import { toast } from "react-toastify";
+import { useDispatch } from '_state/useDispatch';
+import DeleteDialog from 'pages/components/deleteDialog/DeleteDialog';
+import { deleteStudent } from 'pages/studentList/_state/studentSlice';
+import React, { useCallback } from 'react';
+import { toast } from 'react-toastify';
 
-import { Student } from "../_state/types";
+import { Student } from '../_state/types';
 
 interface StudentDialogProps {
-  selectedStudent: Student;
-  onClose: () => void;
+    selectedStudent: Student;
+    onClose: () => void;
 }
 
-export const DeleteStudentDialog: React.FC<StudentDialogProps> = ({
-  selectedStudent,
-  onClose,
-}) => {
-  const dispatch = useDispatch();
-  const handleDelete = useCallback(() => {
-    dispatch(deleteStudent(selectedStudent.id));
-    toast.info("Student deleted successfully");
-    onClose();
-  }, [dispatch, onClose, selectedStudent.id]);
+export const DeleteStudentDialog: React.FC<StudentDialogProps> = ({ selectedStudent, onClose }) => {
+    const dispatch = useDispatch();
 
-  return (
-    <DeleteDialog
-      label="Are you sure want to delete this student ?"
-      onClose={onClose}
-      onDelete={handleDelete}
-      title="Delete student"
-    />
-  );
+    const handleDelete = useCallback(() => {
+        dispatch(deleteStudent(selectedStudent.id));
+        toast.info('Student deleted successfully');
+        onClose();
+    }, [dispatch, onClose, selectedStudent.id]);
+
+    return (
+        <DeleteDialog
+            label="Are you sure want to delete this student ?"
+            onClose={onClose}
+            onDelete={handleDelete}
+            title="Delete student"
+        />
+    );
 };

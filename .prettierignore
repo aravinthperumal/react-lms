@@ -6,3 +6,8 @@ coverage
 **/.svn
 **/.hg
 **/node_modules
+ndex.html
+public/assets/
+public/**/*.html
+tsconfig.json
+README.md

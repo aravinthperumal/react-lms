@@ -1,61 +1,59 @@
 {
-  "users": [
-    {
-      "id": "1",
-      "name": "Kishore",
-      "username": "lmsadmin@gmail.com",
-      "password": "admin123",
-      "role": "ADMIN"
-    },
-    {
-      "id": "2",
-      "name": "Prakash",
-      "username": "lmslibrarian@gmail.com",
-      "password": "library123",
-      "role": "STAFF"
-    }
-  ],
-  "students": [
-    {
-      "id": "dfd4",
-      "name": "Aravinth",
-      "email": "aravinthkp02@gmail.com",
-      "department": "ECE",
-      "booksBorrowed": [
-        "799e"
-      ]
-    },
-    {
-      "id": "8237",
-      "name": "leo",
-      "email": "leo@gmail.com",
-      "department": "EEE",
-      "booksBorrowed": []
-    }
-  ],
-  "books": [
-    {
-      "title": "React",
-      "author": "Martin",
-      "category": "IT",
-      "isbn": "9780262033848",
-      "totalCopies": 2,
-      "availableCopies": 1,
-      "id": "799e"
-    }
-  ],
-  "transactions": [
-    {
-      "id": "abda",
-      "studentId": "dfd4",
-      "studentName": "Aravinth",
-      "bookId": "799e",
-      "bookName": "React",
-      "issueDate": "2025-03-03",
-      "dueDate": "2025-03-04",
-      "returnDate": null,
-      "status": "ISSUED",
-      "penalty": 0
-    }
-  ]
+    "users": [
+        {
+            "id": "1",
+            "name": "Kishore",
+            "username": "lmsadmin@gmail.com",
+            "password": "admin123",
+            "role": "ADMIN"
+        },
+        {
+            "id": "2",
+            "name": "Prakash",
+            "username": "lmslibrarian@gmail.com",
+            "password": "library123",
+            "role": "STAFF"
+        }
+    ],
+    "students": [
+        {
+            "id": "dfd4",
+            "name": "Aravinth",
+            "email": "aravinthkp02@gmail.com",
+            "department": "ECE",
+            "booksBorrowed": ["799e"]
+        },
+        {
+            "id": "8237",
+            "name": "leo",
+            "email": "leo@gmail.com",
+            "department": "EEE",
+            "booksBorrowed": []
+        }
+    ],
+    "books": [
+        {
+            "title": "React",
+            "author": "Martin",
+            "category": "IT",
+            "isbn": "9780262033848",
+            "totalCopies": 2,
+            "availableCopies": 1,
+            "id": "799e"
+        }
+    ],
+    "transactions": [
+        {
+            "id": "abda",
+            "studentId": "dfd4",
+            "studentName": "Aravinth",
+            "bookId": "799e",
+            "bookName": "React",
+            "issueDate": "2025-03-03",
+            "dueDate": "2025-03-04",
+            "returnDate": null,
+            "status": "ISSUED",
+            "penalty": 0
+        }
+    ]
 }
