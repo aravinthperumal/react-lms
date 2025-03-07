@@ -62,7 +62,7 @@ export const StudentDialog: React.FC<StudentDialogProps> = ({ editMode, studentL
         },
     });
 
-    const { dirty, errors, touched, handleSubmit, handleChange, values } = formik;
+    const { dirty, errors, touched, handleSubmit } = formik;
 
     return (
         <FormContainer onSubmit={handleSubmit}>
@@ -70,18 +70,22 @@ export const StudentDialog: React.FC<StudentDialogProps> = ({ editMode, studentL
             {!isAddMode && (
                 <>
                     <Label>Id</Label>
-                    <Input placeholder="id" isDisabled name={'id'} value={values.id} onChange={handleChange} />
+                    <Input placeholder="id" isDisabled {...formik.getFieldProps('id')} />
                 </>
             )}
+            
             <Label>Name</Label>
-            <Input placeholder={'name'} name={'name'} value={values.name} onChange={handleChange} />
+            <Input placeholder={'name'} {...formik.getFieldProps('name')} />
             {errors.name && touched.name && <Error>{errors.name}</Error>}
+            
             <Label>Email</Label>
-            <Input placeholder="email" name={'email'} value={values.email} onChange={handleChange} />
+            <Input placeholder="email" {...formik.getFieldProps('email')} />
             {errors.email && touched.email && <Error>{errors.email}</Error>}
+            
             <Label>Department</Label>
-            <Input placeholder="department" name={'department'} value={values.department} onChange={handleChange} />
+            <Input placeholder="department" {...formik.getFieldProps('department')} />
             {errors.department && touched.department && <Error>{errors.department}</Error>}
+            
             <ButtonWrapper>
                 <CloseButton type="button" onClick={onClose}>
                     Close

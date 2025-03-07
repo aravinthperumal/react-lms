@@ -79,30 +79,24 @@ export const BookTakenEntry: React.FC = () => {
         },
     });
 
-    const { handleSubmit, handleChange, values, touched, errors } = formik;
+    const { handleSubmit, touched, errors } = formik;
 
     return (
         <FormContainer onSubmit={handleSubmit}>
             <h2>{'Book Taken Entry'}</h2>
             <Label>Student</Label>
-            <Dropdown name="studentId" value={values.studentId} options={studentOptions} onChange={handleChange} />
+            <Dropdown options={studentOptions} {...formik.getFieldProps('studentId')} />
             {touched.studentId && errors.studentId && <Error>{errors.studentId}</Error>}
-
+            
             <Label>Book</Label>
-            <Dropdown name="bookId" value={values.bookId} options={bookOptions} onChange={handleChange} />
+            <Dropdown options={bookOptions} {...formik.getFieldProps('bookId')} />
             {touched.bookId && errors.bookId && <Error>{errors.bookId}</Error>}
-
+            
             <Label>Issue Date</Label>
-            <Input
-                name="issueDate"
-                type="date"
-                placeholder="issueDate"
-                onChange={formik.handleChange}
-                value={formik.values.issueDate}
-                isDisabled
-            />
+            <Input type="date" placeholder="issueDate" isDisabled {...formik.getFieldProps('issueDate')} />
+            
             <Label>Last Date To Return</Label>
-            <Input placeholder="dueDate" type="date" name="dueDate" onChange={handleChange} value={values.dueDate} />
+            <Input placeholder="dueDate" type="date" {...formik.getFieldProps('dueDate')} />
             {touched.dueDate && errors.dueDate && <Error>{errors.dueDate}</Error>}
 
             {formErrors && formErrors.map((error, i) => <Error key={i}>{error}</Error>)}

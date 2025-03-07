@@ -77,11 +77,11 @@ export const BookDialog: React.FC<BookDialogProps> = ({ editMode, bookList, onCl
         },
     });
 
-    const { errors, setFieldValue, touched, values, dirty, handleChange, handleSubmit } = formik;
+    const { errors, setFieldValue, touched, values, dirty, handleSubmit } = formik;
 
     useEffect(() => {
         if (isAddMode) {
-            setFieldValue('availableCopies', formik.values.totalCopies);
+            setFieldValue('availableCopies', values.totalCopies);
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [values.totalCopies, isAddMode]); //it should be only affected when total copies changed
@@ -111,52 +111,39 @@ export const BookDialog: React.FC<BookDialogProps> = ({ editMode, bookList, onCl
             {!isAddMode && (
                 <>
                     <Label>Id</Label>
-                    <Input
-                        placeholder="id"
-                        isDisabled
-                        name={'id'}
-                        value={values.id.toString()}
-                        onChange={handleChange}
-                    />
+                    <Input placeholder="id" isDisabled {...formik.getFieldProps('id')} />
                 </>
             )}
+
             <Label>Title</Label>
-            <Input placeholder="title" name={'title'} value={values.title} onChange={handleChange} />
+            <Input placeholder="title" {...formik.getFieldProps('title')} />
             {formik.errors.title && formik.touched.title && <Error>{formik.errors.title}</Error>}
+
             <Label>Author</Label>
-            <Input placeholder="author" name={'author'} value={formik.values.author} onChange={formik.handleChange} />
+            <Input placeholder="author" {...formik.getFieldProps('author')} />
             {errors.author && touched.author && <Error>{errors.author}</Error>}
+
             <Label>Category</Label>
-            <Input placeholder="category" name={'category'} value={values.category} onChange={handleChange} />
+            <Input placeholder="category" {...formik.getFieldProps('category')} />
             {errors.category && touched.category && <Error>{errors.category}</Error>}
+
             <Label>ISBN</Label>
-            <Input
-                placeholder="isbn"
-                isDisabled={!isAddMode}
-                name={'isbn'}
-                value={values.isbn}
-                onChange={handleChange}
-            />
+            <Input placeholder="isbn" isDisabled={!isAddMode} {...formik.getFieldProps('isbn')} />
             {errors.isbn && touched.isbn && <Error>{errors.isbn}</Error>}
+
             <Label>Total Copies</Label>
-            <Input
-                placeholder="totalCopies"
-                name={'totalCopies'}
-                type="number"
-                value={values.totalCopies}
-                onChange={handleChange}
-            />
+            <Input placeholder="totalCopies" type="number" {...formik.getFieldProps('totalCopies')} />
             {errors.totalCopies && touched.totalCopies && <Error>{errors.totalCopies}</Error>}
+
             <Label>Available Copies</Label>
             <Input
                 placeholder="availableCopies"
-                name={'availableCopies'}
-                type="number"
                 isDisabled
-                value={values.availableCopies}
-                onChange={handleChange}
+                type="number"
+                {...formik.getFieldProps('availableCopies')}
             />
             {errors.availableCopies && touched.availableCopies && <Error>{errors.availableCopies}</Error>}
+
             <ButtonWrapper>
                 <CloseButton type="button" onClick={onClose}>
                     Close
