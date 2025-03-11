@@ -73,19 +73,19 @@ export const StudentDialog: React.FC<StudentDialogProps> = ({ editMode, studentL
                     <Input placeholder="id" isDisabled {...formik.getFieldProps('id')} />
                 </>
             )}
-            
+
             <Label>Name</Label>
             <Input placeholder={'name'} {...formik.getFieldProps('name')} />
             {errors.name && touched.name && <Error>{errors.name}</Error>}
-            
+
             <Label>Email</Label>
             <Input placeholder="email" {...formik.getFieldProps('email')} />
             {errors.email && touched.email && <Error>{errors.email}</Error>}
-            
+
             <Label>Department</Label>
             <Input placeholder="department" {...formik.getFieldProps('department')} />
             {errors.department && touched.department && <Error>{errors.department}</Error>}
-            
+
             <ButtonWrapper>
                 <CloseButton type="button" onClick={onClose}>
                     Close

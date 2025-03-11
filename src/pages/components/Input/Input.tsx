@@ -1,9 +1,9 @@
-import React, { KeyboardEvent } from 'react';
+import React, { KeyboardEvent, useState, useCallback } from 'react';
 
 import { ErrorMessage, StyledInput } from './Input.sc';
 
 interface InputProps {
-    type?: 'text' | 'password' | 'email' | 'number' | 'date';
+    type?: 'text' | 'password' | 'email' | 'number' | 'date' | 'checkbox';
     placeholder?: string;
     value: string | number;
     name: string;
@@ -27,10 +27,16 @@ const Input: React.FC<InputProps> = ({
     errorMessage,
     onKeyDown,
 }) => {
+    const [show, setShow] = useState(false);
+
+    const handleToggleShow = useCallback(() => {
+        setShow((prev) => !prev);
+    }, []);
+
     return (
         <div>
             <StyledInput
-                type={type}
+                type={show && type === 'password' ? 'text' : type}
                 placeholder={placeholder}
                 value={value}
                 name={name}
@@ -40,7 +46,15 @@ const Input: React.FC<InputProps> = ({
                 onChange={onChange}
                 onKeyDown={onKeyDown}
             />
-            {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
+
+            {type === 'password' && (
+                <label>
+                    <input type="checkbox" disabled={isDisabled} onChange={handleToggleShow} checked={show} />
+                    {' Show'}
+                </label>
+            )}
+
+            {hasError && errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
         </div>
     );
 };

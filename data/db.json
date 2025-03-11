@@ -1,11 +1,11 @@
 {
   "users": [
     {
+      "name": "Melvinx",
       "id": "1",
-      "name": "Kishore",
-      "username": "lmsadmin@gmail.com",
-      "password": "admin123",
-      "role": "ADMIN"
+      "password": "admin1234",
+      "role": "ADMIN",
+      "username": "admin@gmail.co"
     },
     {
       "id": "2",
@@ -18,7 +18,7 @@
   "students": [
     {
       "name": "Aravinth",
-      "email": "aravinthkp02@gmail.com",
+      "email": "aravinthkp02@gmail",
       "department": "EEE",
       "booksBorrowed": [
         "de2b"

@@ -18,3 +18,6 @@ export enum EDIT_MODE {
     ADD = 'ADD',
     EDIT = 'EDIT',
 }
+
+//error text
+export const USER_DATA_ERROR = 'Server Error: Fail to updated user data';

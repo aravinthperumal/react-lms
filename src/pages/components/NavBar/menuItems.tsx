@@ -4,6 +4,10 @@ export interface MenuItem {
 }
 export const menuItems: MenuItem[] = [
     {
+        path: '/my-profile',
+        label: 'My Profile',
+    },
+    {
         path: '/student-list',
         label: 'Student List',
     },
