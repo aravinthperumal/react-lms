@@ -9,6 +9,7 @@ import Table from 'pages/components/table/Table';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { sanitizeAndValidateFilters } from 'utils/functions/validationFunctions';
 
 import { fetchBooks } from './_state/bookSlice';
 import { Book } from './_state/types';
@@ -51,7 +52,7 @@ export const BookList: React.FC = () => {
         searchParams.forEach((value, key) => {
             params[key] = value;
         });
-        return params;
+        return sanitizeAndValidateFilters(params);
     }, [searchParams]);
 
     useEffect(() => {

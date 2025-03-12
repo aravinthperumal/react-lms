@@ -76,38 +76,36 @@ const Login: React.FC = () => {
     );
 
     return (
-        <>
-            <LoginCardWrapper>
-                <LoginContainer>
-                    <LoginTitle>Login</LoginTitle>
-                    <Input
-                        name="username"
-                        value={username}
-                        type="email"
-                        onChange={onChangeUserName}
-                        placeholder="Username"
-                        hasError={!isEmpty(formError.name)}
-                        errorMessage={formError.name}
-                        onKeyDown={handleKeyDown}
-                    />
-                    <Input
-                        name="password"
-                        value={password}
-                        onChange={onChangePassword}
-                        type="password"
-                        placeholder="Password"
-                        errorMessage={formError.password}
-                        hasError={!isEmpty(formError.password)}
-                        onKeyDown={handleKeyDown}
-                    />
+        <LoginCardWrapper>
+            <LoginContainer>
+                <LoginTitle>Login</LoginTitle>
+                <Input
+                    name="username"
+                    value={username}
+                    type="email"
+                    onChange={onChangeUserName}
+                    placeholder="Username"
+                    hasError={!isEmpty(formError.name)}
+                    errorMessage={formError.name}
+                    onKeyDown={handleKeyDown}
+                />
+                <Input
+                    name="password"
+                    value={password}
+                    onChange={onChangePassword}
+                    type="password"
+                    placeholder="Password"
+                    errorMessage={formError.password}
+                    hasError={!isEmpty(formError.password)}
+                    onKeyDown={handleKeyDown}
+                />
 
-                    <SubmitButton disabled={!isLoginAllowed} onClick={handleSubmit}>
-                        Login
-                    </SubmitButton>
-                    {error && <ErrorText>{error}</ErrorText>}
-                </LoginContainer>
-            </LoginCardWrapper>
-        </>
+                <SubmitButton disabled={!isLoginAllowed} onClick={handleSubmit}>
+                    Login
+                </SubmitButton>
+                {error && <ErrorText>{error}</ErrorText>}
+            </LoginContainer>
+        </LoginCardWrapper>
     );
 };
 

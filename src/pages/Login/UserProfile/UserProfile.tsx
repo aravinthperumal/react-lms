@@ -59,36 +59,34 @@ export const UserProfile: React.FC = () => {
     }, []);
 
     return (
-        <>
-            <FormContainer onSubmit={handleSubmit}>
-                <h2>Profile</h2>
-                <Label>Name</Label>
-                <Input isDisabled={!isEditing} {...getFieldProps('name')} />
-                {touched.name && errors.name && <Error>{errors.name}</Error>}
-                <Label>Email</Label>
-                <Input isDisabled={!isEditing} {...getFieldProps('username')} />
-                {touched.username && errors.username && <Error>{errors.username}</Error>}
-                <Label>Password</Label>
-                <Input type="password" isDisabled={!isEditing} {...getFieldProps('password')} />
-                {touched.password && errors.password && <Error>{errors.password}</Error>}
-                <Label>Role</Label>
-                <Input isDisabled {...getFieldProps('role')} />
-                <ButtonWrapper>
-                    <CloseButton type="button" onClick={onCancel}>
-                        Cancel
-                    </CloseButton>
-                    {isEditing ? (
-                        <Button disabled={!dirty || isLoading} type="submit">
-                            Save
-                        </Button>
-                    ) : (
-                        <Button type="button" onClick={onEdit}>
-                            Edit
-                        </Button>
-                    )}
-                </ButtonWrapper>
-                {error && <Error>{error}</Error>}
-            </FormContainer>
-        </>
+        <FormContainer onSubmit={handleSubmit}>
+            <h2>Profile</h2>
+            <Label>Name</Label>
+            <Input isDisabled={!isEditing} {...getFieldProps('name')} />
+            {touched.name && errors.name && <Error>{errors.name}</Error>}
+            <Label>Email</Label>
+            <Input isDisabled={!isEditing} {...getFieldProps('username')} />
+            {touched.username && errors.username && <Error>{errors.username}</Error>}
+            <Label>Password</Label>
+            <Input type="password" isDisabled={!isEditing} {...getFieldProps('password')} />
+            {touched.password && errors.password && <Error>{errors.password}</Error>}
+            <Label>Role</Label>
+            <Input isDisabled {...getFieldProps('role')} />
+            <ButtonWrapper>
+                <CloseButton type="button" onClick={onCancel}>
+                    Cancel
+                </CloseButton>
+                {isEditing ? (
+                    <Button disabled={!dirty || isLoading} type="submit">
+                        Save
+                    </Button>
+                ) : (
+                    <Button type="button" onClick={onEdit}>
+                        Edit
+                    </Button>
+                )}
+            </ButtonWrapper>
+            {error && <Error>{error}</Error>}
+        </FormContainer>
     );
 };

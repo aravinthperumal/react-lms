@@ -9,6 +9,7 @@ import Table from 'pages/components/table/Table';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { sanitizeAndValidateFilters } from 'utils/functions/validationFunctions';
 
 import { fetchStudents } from './_state/studentSlice';
 import { Student } from './_state/types';
@@ -42,7 +43,7 @@ export const StudentList: React.FC = () => {
         searchParams.forEach((value, key) => {
             params[key] = value;
         });
-        return params;
+        return sanitizeAndValidateFilters(params);
     }, [searchParams]);
 
     useEffect(() => {
