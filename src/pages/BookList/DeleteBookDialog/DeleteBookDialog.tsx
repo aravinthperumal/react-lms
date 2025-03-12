@@ -7,17 +7,19 @@ import { toast } from 'react-toastify';
 import { Book } from '../_state/types';
 
 interface DeleteBookDialogProps {
-    selectedBook: Book;
+    selectedBook: Book | null;
     onClose: () => void;
 }
 
 export const DeleteBookDialog: React.FC<DeleteBookDialogProps> = ({ selectedBook, onClose }) => {
     const dispatch = useDispatch();
     const handleDelete = useCallback(() => {
-        dispatch(deleteBook(selectedBook.id));
-        toast.info('Book deleted successfully');
-        onClose();
-    }, [dispatch, onClose, selectedBook.id]);
+        if (selectedBook) {
+            dispatch(deleteBook(selectedBook.id));
+            toast.info('Book deleted successfully');
+            onClose();
+        }
+    }, [dispatch, onClose, selectedBook]);
 
     return (
         <DeleteDialog

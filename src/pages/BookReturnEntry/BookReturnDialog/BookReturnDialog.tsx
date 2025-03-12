@@ -1,6 +1,6 @@
 import { useDispatch } from '_state/useDispatch';
 import { useFormik } from 'formik';
-import { BOOK_RETURNED } from 'globals/constants';
+import { BOOK_RETURNED, EMPTY_VALUE } from 'globals/constants';
 import Button from 'pages/components/button/Button';
 import { ButtonWrapper, CloseButton, FormContainer, Label } from 'pages/components/formWrapper/FormWrapper.sc';
 import Input from 'pages/components/input/Input';
@@ -12,7 +12,7 @@ import { returnBook } from '../_state/bookTransactionSlice';
 import { BookTransaction } from '../_state/types';
 
 interface BookReturnDialog {
-    bookTransaction: BookTransaction;
+    bookTransaction: BookTransaction | null;
     onClose: () => void;
 }
 
@@ -28,16 +28,16 @@ export const BookReturnDialog: React.FC<BookReturnDialog> = ({ bookTransaction, 
     );
     const formik = useFormik<BookTransaction>({
         initialValues: {
-            bookId: bookTransaction.bookId,
-            bookName: bookTransaction.bookName,
-            id: bookTransaction.id,
-            dueDate: bookTransaction.dueDate,
-            issueDate: bookTransaction.issueDate,
-            penalty: calculatePenalty(bookTransaction.dueDate),
+            bookId: bookTransaction?.bookId ?? EMPTY_VALUE,
+            bookName: bookTransaction?.bookName ?? EMPTY_VALUE,
+            id: bookTransaction?.id ?? EMPTY_VALUE,
+            dueDate: bookTransaction?.dueDate ?? EMPTY_VALUE,
+            issueDate: bookTransaction?.issueDate ?? EMPTY_VALUE,
+            penalty: calculatePenalty(bookTransaction?.dueDate ?? EMPTY_VALUE),
             returnDate: todayDate(),
             status: BOOK_RETURNED,
-            studentId: bookTransaction.studentId,
-            studentName: bookTransaction.studentName,
+            studentId: bookTransaction?.studentId ?? EMPTY_VALUE,
+            studentName: bookTransaction?.studentName ?? EMPTY_VALUE,
         },
         onSubmit: (values) => {
             onSubmit(values);

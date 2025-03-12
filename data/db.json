@@ -17,98 +17,55 @@
   ],
   "students": [
     {
-      "name": "Aravinth",
-      "email": "aravinthkp02@gmail",
-      "department": "EEE",
-      "booksBorrowed": [
-        "de2b"
-      ],
-      "id": "dfd4"
-    },
-    {
-      "name": "leo",
-      "email": "leo123@gmail.com",
-      "department": "EEE",
-      "booksBorrowed": [
-        "799e",
-        "799e"
-      ],
-      "id": "8237"
-    },
-    {
-      "id": "df6e",
-      "name": "leo",
+      "id": "69d0",
+      "department": "ECE",
       "email": "akash@kiot.in",
-      "department": "CSE",
+      "name": "Akash K",
       "booksBorrowed": []
+    },
+    {
+      "id": "6e81",
+      "department": "EEE",
+      "email": "aravinthkp02@gmail.com",
+      "name": "test",
+      "booksBorrowed": [
+        "9b48"
+      ]
     }
   ],
   "books": [
     {
-      "title": "React",
+      "id": "9b48",
       "author": "Martin",
-      "category": "IT",
-      "isbn": "9780262033848",
-      "totalCopies": 2,
-      "availableCopies": 0,
-      "id": "799e"
-    },
-    {
-      "title": "C",
-      "author": "Martin",
-      "category": "AI",
-      "isbn": "9780134105456",
-      "totalCopies": 3,
       "availableCopies": 2,
-      "id": "de2b"
+      "category": "IT",
+      "isbn": "9780134105456",
+      "title": "React",
+      "totalCopies": 3
     }
   ],
   "transactions": [
     {
-      "bookId": "799e",
+      "bookId": "9b48",
       "bookName": "React",
-      "id": "abda",
-      "dueDate": "2025-03-04",
-      "issueDate": "2025-03-03",
-      "penalty": 15,
-      "returnDate": "2025-03-07",
+      "id": "9abc",
+      "dueDate": "2025-03-14",
+      "issueDate": "2025-03-12",
+      "penalty": 0,
+      "returnDate": "2025-03-12",
       "status": "RETURNED",
-      "studentId": "dfd4",
-      "studentName": "Aravinth"
+      "studentId": "69d0",
+      "studentName": "Akash K"
     },
     {
-      "id": "24f2",
-      "studentId": "8237",
-      "studentName": "leo",
-      "bookId": "799e",
+      "id": "8bee",
+      "studentId": "6e81",
+      "studentName": "test",
+      "bookId": "9b48",
       "bookName": "React",
-      "issueDate": "2025-03-07",
-      "dueDate": "2025-03-08",
-      "returnDate": null,
-      "status": "ISSUED",
-      "penalty": 0
-    },
-    {
-      "id": "9434",
-      "studentId": "8237",
-      "studentName": "leo",
-      "bookId": "799e",
-      "bookName": "React",
-      "issueDate": "2025-03-07",
-      "dueDate": "2025-03-09",
-      "returnDate": null,
-      "status": "ISSUED",
-      "penalty": 0
-    },
-    {
-      "id": "198b",
-      "studentId": "dfd4",
-      "studentName": "Aravinth",
-      "bookId": "de2b",
-      "bookName": "C",
-      "issueDate": "2025-03-07",
-      "dueDate": "2025-03-08",
-      "returnDate": null,
+      "issueDate": "2025-03-12",
+      "dueDate": "2025-03-13",
+      "returnDate": "",
       "status": "ISSUED",
       "penalty": 0
     }

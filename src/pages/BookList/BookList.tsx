@@ -41,7 +41,7 @@ export const BookList: React.FC = () => {
     const { user } = useSelector((state) => state.user);
     const isAdmin = user.role === ADMIN;
     const { bookList, isLoading } = useSelector((state) => state.book);
-    const [selectedBook, setSelectedBook] = useState<Book>({} as Book);
+    const [selectedBook, setSelectedBook] = useState<Book | null>(null);
     const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
     const [openBookDialog, setOpenBookDialog] = useState(false);
     const [editMode, setEditMode] = useState(EDIT_MODE.ADD);
@@ -60,7 +60,7 @@ export const BookList: React.FC = () => {
 
     const onAdd = useCallback(() => {
         setOpenBookDialog(true);
-        setSelectedBook({} as Book);
+        setSelectedBook(null);
         setEditMode(EDIT_MODE.ADD);
     }, []);
 
@@ -72,7 +72,7 @@ export const BookList: React.FC = () => {
 
     const onCloseBookDialog = useCallback(() => {
         setOpenBookDialog(false);
-        setSelectedBook({} as Book);
+        setSelectedBook(null);
     }, []);
 
     const onDelete = useCallback((book: Book) => {
@@ -86,7 +86,7 @@ export const BookList: React.FC = () => {
 
     const onCloseDeleteDialog = useCallback(() => {
         setOpenDeleteDialog(false);
-        setSelectedBook({} as Book);
+        setSelectedBook(null);
     }, []);
 
     return (

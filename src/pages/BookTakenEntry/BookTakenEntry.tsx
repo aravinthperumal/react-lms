@@ -47,7 +47,7 @@ export const BookTakenEntry: React.FC = () => {
             bookName: EMPTY_VALUE,
             issueDate: todayDate(),
             dueDate: EMPTY_VALUE,
-            returnDate: null,
+            returnDate: EMPTY_VALUE,
             status: BOOK_ISSUED,
             penalty: NUMBER_ZERO,
         },
@@ -87,14 +87,14 @@ export const BookTakenEntry: React.FC = () => {
             <Label>Student</Label>
             <Dropdown options={studentOptions} {...formik.getFieldProps('studentId')} />
             {touched.studentId && errors.studentId && <Error>{errors.studentId}</Error>}
-            
+
             <Label>Book</Label>
             <Dropdown options={bookOptions} {...formik.getFieldProps('bookId')} />
             {touched.bookId && errors.bookId && <Error>{errors.bookId}</Error>}
-            
+
             <Label>Issue Date</Label>
             <Input type="date" placeholder="issueDate" isDisabled {...formik.getFieldProps('issueDate')} />
-            
+
             <Label>Last Date To Return</Label>
             <Input placeholder="dueDate" type="date" {...formik.getFieldProps('dueDate')} />
             {touched.dueDate && errors.dueDate && <Error>{errors.dueDate}</Error>}

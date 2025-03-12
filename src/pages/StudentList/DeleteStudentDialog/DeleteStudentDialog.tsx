@@ -7,7 +7,7 @@ import { toast } from 'react-toastify';
 import { Student } from '../_state/types';
 
 interface StudentDialogProps {
-    selectedStudent: Student;
+    selectedStudent: Student | null;
     onClose: () => void;
 }
 
@@ -15,10 +15,12 @@ export const DeleteStudentDialog: React.FC<StudentDialogProps> = ({ selectedStud
     const dispatch = useDispatch();
 
     const handleDelete = useCallback(() => {
-        dispatch(deleteStudent(selectedStudent.id));
-        toast.info('Student deleted successfully');
-        onClose();
-    }, [dispatch, onClose, selectedStudent.id]);
+        if (selectedStudent) {
+            dispatch(deleteStudent(selectedStudent.id));
+            toast.info('Student deleted successfully');
+            onClose();
+        }
+    }, [dispatch, onClose, selectedStudent]);
 
     return (
         <DeleteDialog

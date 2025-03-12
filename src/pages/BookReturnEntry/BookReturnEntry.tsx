@@ -17,7 +17,7 @@ export const BookReturnEntry: React.FC = () => {
     const dispatch = useDispatch();
     const [searchParams] = useSearchParams();
     const { transaction, isLoading } = useSelector((state) => state.bookTransaction);
-    const [selectedTransaction, setSelectedTransaction] = useState<BookTransaction>({} as BookTransaction);
+    const [selectedTransaction, setSelectedTransaction] = useState<BookTransaction | null>(null);
     const [openReturnDialog, setOpenReturnDialog] = useState(false);
 
     const searchParamsObj = useMemo(() => {
@@ -39,7 +39,7 @@ export const BookReturnEntry: React.FC = () => {
 
     const handleClose = useCallback(() => {
         setOpenReturnDialog(false);
-        setSelectedTransaction({} as BookTransaction);
+        setSelectedTransaction(null);
     }, []);
     return (
         <>

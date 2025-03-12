@@ -14,7 +14,7 @@ import { validationSchema } from './validationSchema';
 
 interface StudentDialogProps {
     studentList: Student[];
-    previousStudent: Student;
+    previousStudent: Student | null;
     editMode: EDIT_MODE;
     onClose: () => void;
 }
@@ -28,7 +28,14 @@ export const StudentDialog: React.FC<StudentDialogProps> = ({ editMode, studentL
         (data: Student) => {
             const isAlreadyExist = checkIfStudentExists(studentList, data.name, data.email);
             if (!isAlreadyExist) {
-                dispatch(addStudent(data));
+                dispatch(
+                    addStudent({
+                        department: data.department,
+                        email: data.email,
+                        name: data.name,
+                        booksBorrowed: data.booksBorrowed,
+                    }),
+                );
                 toast.info('Student added successfully');
                 onClose();
             } else {
@@ -49,11 +56,11 @@ export const StudentDialog: React.FC<StudentDialogProps> = ({ editMode, studentL
 
     const formik = useFormik<Student>({
         initialValues: {
-            name: previousStudent.name ?? EMPTY_VALUE,
-            email: previousStudent.email ?? EMPTY_VALUE,
-            department: previousStudent.department ?? EMPTY_VALUE,
-            booksBorrowed: previousStudent.booksBorrowed ?? EMPTY_LIST,
-            id: previousStudent.id,
+            name: previousStudent?.name ?? EMPTY_VALUE,
+            email: previousStudent?.email ?? EMPTY_VALUE,
+            department: previousStudent?.department ?? EMPTY_VALUE,
+            booksBorrowed: previousStudent?.booksBorrowed ?? EMPTY_LIST,
+            id: previousStudent?.id ?? EMPTY_VALUE,
         },
         validationSchema: validationSchema,
         onSubmit: (values) => {

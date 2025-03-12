@@ -33,7 +33,7 @@ export const StudentList: React.FC = () => {
     const [searchParams] = useSearchParams();
     const [openStudentDialog, setOpenStudentDialog] = useState(false);
     const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
-    const [selectedStudent, setSelectedStudent] = useState<Student>({} as Student);
+    const [selectedStudent, setSelectedStudent] = useState<Student | null>(null);
     const [editMode, setEditMode] = useState(EDIT_MODE.ADD);
 
     //extract params from router search params
@@ -51,7 +51,7 @@ export const StudentList: React.FC = () => {
 
     const onAdd = useCallback(() => {
         setOpenStudentDialog(true);
-        setSelectedStudent({} as Student);
+        setSelectedStudent(null);
         setEditMode(EDIT_MODE.ADD);
     }, []);
 
@@ -63,7 +63,7 @@ export const StudentList: React.FC = () => {
 
     const onCloseStudentDialog = useCallback(() => {
         setOpenStudentDialog(false);
-        setSelectedStudent({} as Student);
+        setSelectedStudent(null);
     }, []);
 
     const onDelete = useCallback((student: Student) => {
@@ -77,7 +77,7 @@ export const StudentList: React.FC = () => {
 
     const onCloseDeleteDialog = useCallback(() => {
         setOpenDeleteDialog(false);
-        setSelectedStudent({} as Student);
+        setSelectedStudent(null);
     }, []);
     return (
         <>

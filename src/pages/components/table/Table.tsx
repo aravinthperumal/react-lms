@@ -53,7 +53,7 @@ export default function Table<T>(props: TableProps<T>) {
                 <thead>
                     <StyledTr>
                         {columns.map((column) => (
-                            <StyledTh key={column.id as string}>{column.label}</StyledTh>
+                            <StyledTh key={String(column.id)}>{column.label}</StyledTh>
                         ))}
                     </StyledTr>
                 </thead>
@@ -77,7 +77,7 @@ export default function Table<T>(props: TableProps<T>) {
                                     {columns.map((column, index) => {
                                         return (
                                             <StyledTd key={index}>
-                                                {column.render ? column.render(row) : (row[column?.id] as string)}
+                                                {column.render ? column.render(row) : String(row[column?.id])}
                                             </StyledTd>
                                         );
                                     })}

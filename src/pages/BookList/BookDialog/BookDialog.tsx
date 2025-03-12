@@ -1,6 +1,6 @@
 import { useDispatch } from '_state/useDispatch';
 import { useFormik } from 'formik';
-import { EDIT_MODE, EMPTY_VALUE, NUMBER_ONE } from 'globals/constants';
+import { EDIT_MODE, EMPTY_VALUE, NUMBER_ONE, NUMBER_ZERO } from 'globals/constants';
 import { addBook, updateBook } from 'pages/bookList/_state/bookSlice';
 import { Book } from 'pages/bookList/_state/types';
 import Button from 'pages/components/button/Button';
@@ -21,7 +21,7 @@ import { bookValidationSchema } from './validationSchema';
 
 interface BookDialogProps {
     bookList: Book[];
-    previousBook: Book;
+    previousBook: Book | null;
     editMode: EDIT_MODE;
     onClose: () => void;
 }
@@ -30,11 +30,20 @@ export const BookDialog: React.FC<BookDialogProps> = ({ editMode, bookList, onCl
     const dispatch = useDispatch();
     const isAddMode = editMode === EDIT_MODE.ADD;
     const [error, setError] = useState<string>('');
-    const [prevTotalCopies, setPrevTotalCopies] = useState(previousBook.totalCopies);
+    const [prevTotalCopies, setPrevTotalCopies] = useState<number>(previousBook?.totalCopies ?? NUMBER_ZERO);
 
     const handleAddCallback = useCallback(
         (data: Book) => {
-            dispatch(addBook(data));
+            dispatch(
+                addBook({
+                    author: data.author,
+                    availableCopies: data.availableCopies,
+                    category: data.category,
+                    isbn: data.isbn,
+                    title: data.title,
+                    totalCopies: data.totalCopies,
+                }),
+            );
             toast.info('Book added successfully');
             onClose();
         },
@@ -51,20 +60,20 @@ export const BookDialog: React.FC<BookDialogProps> = ({ editMode, bookList, onCl
     );
 
     // to manage total copies decrement limit in edit mode based on previous total and available copies
-    const totalCopiesLimit = useMemo(
-        () => (isAddMode ? NUMBER_ONE : previousBook.totalCopies - previousBook.availableCopies),
-        [isAddMode, previousBook.availableCopies, previousBook.totalCopies],
-    );
+    const totalCopiesLimit = useMemo(() => {
+        if (isAddMode) return NUMBER_ONE;
+        return (previousBook?.totalCopies ?? NUMBER_ZERO) - (previousBook?.availableCopies ?? NUMBER_ZERO);
+    }, [isAddMode, previousBook]);
 
     const formik = useFormik({
         initialValues: {
-            title: previousBook.title ?? EMPTY_VALUE,
-            author: previousBook.author ?? EMPTY_VALUE,
-            category: previousBook.category ?? EMPTY_VALUE,
-            isbn: previousBook.isbn ?? EMPTY_VALUE,
-            totalCopies: previousBook.totalCopies ?? NUMBER_ONE,
-            availableCopies: previousBook.availableCopies ?? NUMBER_ONE,
-            id: previousBook.id,
+            title: previousBook?.title ?? EMPTY_VALUE,
+            author: previousBook?.author ?? EMPTY_VALUE,
+            category: previousBook?.category ?? EMPTY_VALUE,
+            isbn: previousBook?.isbn ?? EMPTY_VALUE,
+            totalCopies: previousBook?.totalCopies ?? NUMBER_ONE,
+            availableCopies: previousBook?.availableCopies ?? NUMBER_ONE,
+            id: previousBook?.id ?? EMPTY_VALUE,
         },
         validationSchema: bookValidationSchema(totalCopiesLimit || NUMBER_ONE),
         onSubmit: (values) => {
