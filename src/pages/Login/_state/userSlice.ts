@@ -20,7 +20,7 @@ const initialState: LoginState = {
 
 export const updateUser = createAsyncThunk('users/update', async (userData: User, { rejectWithValue }) => {
     try {
-        const response = await axios.put<User>(`${baseURL}/user/${userData.id}`, userData);
+        const response = await axios.put<User>(`${baseURL}/users/${userData.id}`, userData);
         return response.data;
     } catch {
         return rejectWithValue(USER_DATA_ERROR);

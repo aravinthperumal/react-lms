@@ -62,16 +62,16 @@ export const UserProfile: React.FC = () => {
         <FormContainer onSubmit={handleSubmit}>
             <h2>Profile</h2>
             <Label>Name</Label>
-            <Input isDisabled={!isEditing} {...getFieldProps('name')} />
+            <Input placeholder="name" isDisabled={!isEditing} {...getFieldProps('name')} />
             {touched.name && errors.name && <Error>{errors.name}</Error>}
             <Label>Email</Label>
-            <Input isDisabled={!isEditing} {...getFieldProps('username')} />
+            <Input placeholder="username" isDisabled={!isEditing} {...getFieldProps('username')} />
             {touched.username && errors.username && <Error>{errors.username}</Error>}
             <Label>Password</Label>
-            <Input type="password" isDisabled={!isEditing} {...getFieldProps('password')} />
+            <Input placeholder="password" type="password" isDisabled={!isEditing} {...getFieldProps('password')} />
             {touched.password && errors.password && <Error>{errors.password}</Error>}
             <Label>Role</Label>
-            <Input isDisabled {...getFieldProps('role')} />
+            <Input placeholder="role" isDisabled {...getFieldProps('role')} />
             <ButtonWrapper>
                 <CloseButton type="button" onClick={onCancel}>
                     Cancel

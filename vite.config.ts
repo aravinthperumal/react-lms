@@ -12,4 +12,8 @@ export default defineConfig({
             _state: '/src/_state',
         },
     },
+    server: {
+        port: 5000,
+        open: true,
+    },
 });

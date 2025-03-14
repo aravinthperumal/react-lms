@@ -5,7 +5,7 @@
       "id": "1",
       "password": "admin1234",
       "role": "ADMIN",
-      "username": "admin@gmail.co"
+      "username": "admin@gmail.com"
     },
     {
       "id": "2",
@@ -35,13 +35,13 @@
   ],
   "books": [
     {
-      "id": "9b48",
+      "title": "React",
       "author": "Martin",
-      "availableCopies": 2,
       "category": "IT",
       "isbn": "9780134105456",
-      "title": "React",
-      "totalCopies": 3
+      "totalCopies": 2,
+      "availableCopies": 1,
+      "id": "9b48"
     }
   ],
   "transactions": [
