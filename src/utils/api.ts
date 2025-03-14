@@ -1,4 +1,5 @@
 import axios from 'axios';
+
 import { baseURL } from 'globals/server';
 
 import { User } from './types';

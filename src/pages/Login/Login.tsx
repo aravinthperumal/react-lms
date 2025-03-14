@@ -1,9 +1,13 @@
-import { useDispatch } from '_state/useDispatch';
-import { LOCALSTORAGE_USER } from 'globals/constants';
-import Input from 'pages/components/input/Input';
 import React, { useCallback, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { toast } from 'react-toastify';
+
+import { useDispatch } from '_state/useDispatch';
+
+import { LOCALSTORAGE_USER } from 'globals/constants';
+
+import Input from 'pages/components/input/Input';
+
 import { fetchUserData } from 'utils/api';
 import { isEnterKey } from 'utils/functions/keyboardFunctions';
 import { isEmpty, isValidEmail } from 'utils/functions/validationFunctions';

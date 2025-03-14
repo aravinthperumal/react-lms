@@ -1,5 +1,6 @@
-import Button from 'pages/components/button/Button';
 import React, { useCallback } from 'react';
+
+import Button from 'pages/components/button/Button';
 
 import { ButtonWrapper, CloseButton, FormContainer, Label } from '../formWrapper/FormWrapper.sc';
 

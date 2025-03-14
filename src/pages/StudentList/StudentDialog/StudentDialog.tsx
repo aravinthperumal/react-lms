@@ -1,13 +1,17 @@
-import { useDispatch } from '_state/useDispatch';
 import { useFormik } from 'formik';
+import React, { useCallback, useState } from 'react';
+import { toast } from 'react-toastify';
+
+import { useDispatch } from '_state/useDispatch';
+
 import { EDIT_MODE, EMPTY_LIST, EMPTY_VALUE } from 'globals/constants';
+
 import Button from 'pages/components/button/Button';
 import { ButtonWrapper, CloseButton, Error, FormContainer, Label } from 'pages/components/formWrapper/FormWrapper.sc';
 import Input from 'pages/components/input/Input';
 import { addStudent, updateStudent } from 'pages/studentList/_state/studentSlice';
 import { Student } from 'pages/studentList/_state/types';
-import React, { useCallback, useState } from 'react';
-import { toast } from 'react-toastify';
+
 import { checkIfStudentExists } from 'utils/functions/arrayObjectFunctions';
 
 import { validationSchema } from './validationSchema';

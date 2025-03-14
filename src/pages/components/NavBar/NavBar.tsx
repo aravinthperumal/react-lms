@@ -1,9 +1,13 @@
-import { useDispatch } from '_state/useDispatch';
-import { useSelector } from '_state/useSelector';
-import { LOCALSTORAGE_USER } from 'globals/constants';
-import { logOut } from 'pages/login/_state/userSlice';
 import { useCallback, useState } from 'react';
 import { useNavigate } from 'react-router';
+
+import { useDispatch } from '_state/useDispatch';
+import { useSelector } from '_state/useSelector';
+
+import { LOCALSTORAGE_USER } from 'globals/constants';
+
+import { logOut } from 'pages/login/_state/userSlice';
+
 import { removeFromLocalStorage } from 'utils/localStorage/localStorage';
 
 import { menuItems } from './menuItems';

@@ -1,7 +1,7 @@
 {
   "users": [
     {
-      "name": "Melvinx",
+      "name": "Melvin",
       "id": "1",
       "password": "admin1234",
       "role": "ADMIN",
@@ -42,6 +42,15 @@
       "totalCopies": 2,
       "availableCopies": 1,
       "id": "9b48"
+    },
+    {
+      "id": "ca62",
+      "author": "Martin",
+      "availableCopies": 3,
+      "category": "IT",
+      "isbn": "9780134105455",
+      "title": "C",
+      "totalCopies": 3
     }
   ],
   "transactions": [

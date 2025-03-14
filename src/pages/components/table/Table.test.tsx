@@ -1,4 +1,5 @@
 import { columns, rows } from 'test/__mocks__/tableMock';
+
 import { fireEvent, renderWithProviders, screen } from 'utils/test-utils';
 
 import Table from './Table';

@@ -1,9 +1,10 @@
 /* eslint-disable react-refresh/only-export-components */
 import { render, RenderOptions } from '@testing-library/react';
-import { AppStore, RootState, setupStore } from '_state/store';
 import React, { JSX, PropsWithChildren } from 'react';
 import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router';
+
+import { AppStore, RootState, setupStore } from '_state/store';
 
 interface ExtendedRenderOptions extends Omit<RenderOptions, 'queries'> {
     preloadedState?: Partial<RootState>;

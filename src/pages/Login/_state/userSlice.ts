@@ -1,7 +1,9 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import axios from 'axios';
+
 import { LOCALSTORAGE_USER, USER_DATA_ERROR } from 'globals/constants';
 import { baseURL } from 'globals/server';
+
 import { getFromLocalStorage } from 'utils/localStorage/localStorage';
 import { User } from 'utils/types';
 

@@ -1,5 +1,7 @@
 import { screen, fireEvent, waitFor } from '@testing-library/react';
+
 import Login from 'pages/login/Login';
+
 import { fetchUserData } from 'utils/api';
 import { renderWithProviders } from 'utils/test-utils';
 

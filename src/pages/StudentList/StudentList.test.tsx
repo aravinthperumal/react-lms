@@ -1,8 +1,11 @@
 import { screen, waitFor } from '@testing-library/react';
-import { setupStore } from '_state/store';
 import axios from 'axios';
-import { StudentList } from 'pages/studentList/StudentList';
 import { studentData } from 'test/__mocks__/studentListMock';
+
+import { setupStore } from '_state/store';
+
+import { StudentList } from 'pages/studentList/StudentList';
+
 import { renderWithProviders } from 'utils/test-utils';
 
 jest.mock('axios');

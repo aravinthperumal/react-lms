@@ -1,5 +1,7 @@
-import { EMPTY_VALUE, EDIT_MODE, NUMBER_ONE } from 'globals/constants';
 import { previousBook } from 'test/__mocks__/bookListMock';
+
+import { EMPTY_VALUE, EDIT_MODE, NUMBER_ONE } from 'globals/constants';
+
 import { renderWithProviders, act, screen, fireEvent } from 'utils/test-utils';
 
 import { Book } from '../_state/types';

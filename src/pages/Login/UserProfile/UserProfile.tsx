@@ -1,13 +1,17 @@
-import { useDispatch } from '_state/useDispatch';
-import { useSelector } from '_state/useSelector';
 import { useFormik } from 'formik';
-import { LOCALSTORAGE_USER } from 'globals/constants';
-import Button from 'pages/components/button/Button';
-import { ButtonWrapper, CloseButton, Error, FormContainer, Label } from 'pages/components/formWrapper/FormWrapper.sc';
-import Input from 'pages/components/input/Input';
 import { useCallback, useState } from 'react';
 import { shallowEqual } from 'react-redux';
 import { toast } from 'react-toastify';
+
+import { useDispatch } from '_state/useDispatch';
+import { useSelector } from '_state/useSelector';
+
+import { LOCALSTORAGE_USER } from 'globals/constants';
+
+import Button from 'pages/components/button/Button';
+import { ButtonWrapper, CloseButton, Error, FormContainer, Label } from 'pages/components/formWrapper/FormWrapper.sc';
+import Input from 'pages/components/input/Input';
+
 import { setToLocalStorage } from 'utils/localStorage/localStorage';
 import { User } from 'utils/types';
 

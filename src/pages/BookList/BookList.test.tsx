@@ -1,8 +1,11 @@
 import { screen, waitFor } from '@testing-library/react';
-import { setupStore } from '_state/store';
 import axios from 'axios';
-import { StudentList } from 'pages/studentList/StudentList';
 import { bookData } from 'test/__mocks__/bookListMock';
+
+import { setupStore } from '_state/store';
+
+import { StudentList } from 'pages/studentList/StudentList';
+
 import { renderWithProviders } from 'utils/test-utils';
 
 import { BookList } from './BookList';

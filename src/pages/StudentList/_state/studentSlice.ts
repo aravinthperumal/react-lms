@@ -1,6 +1,8 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { RootState } from '_state/store';
 import axios from 'axios';
+
+import { RootState } from '_state/store';
+
 import { baseURL } from 'globals/server';
 
 import { Student, StudentState } from './types';

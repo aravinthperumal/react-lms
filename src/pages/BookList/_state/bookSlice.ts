@@ -1,6 +1,8 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { RootState } from '_state/store';
 import axios from 'axios';
+
+import { RootState } from '_state/store';
+
 import { MINUS_ONE } from 'globals/constants';
 import { baseURL } from 'globals/server';
 

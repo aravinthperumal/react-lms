@@ -1,5 +1,6 @@
-import { NUMBER_ZERO } from 'globals/constants';
 import { useState } from 'react';
+
+import { NUMBER_ZERO } from 'globals/constants';
 
 import {
     LoadingWrapper,

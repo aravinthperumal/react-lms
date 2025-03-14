@@ -1,4 +1,5 @@
 import { createPortal } from 'react-dom';
+
 import { DialogSize } from 'utils/types';
 
 import { ModalContent, ModalOverlay } from './Modal.sc';

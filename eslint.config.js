@@ -9,7 +9,7 @@ export default tseslint.config(
     { ignores: ['dist', 'coverage'] },
     {
         extends: [js.configs.recommended, ...tseslint.configs.recommended],
-        files: ['*src/**/*.{ts,tsx}'],
+        files: ['src/**/*.{ts,tsx}'],
         languageOptions: {
             ecmaVersion: 2020,
             globals: globals.browser,
@@ -23,12 +23,18 @@ export default tseslint.config(
             ...reactHooks.configs.recommended.rules,
             'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
             'import/order': [
-                // Add the import order rule
                 'warn',
                 {
                     groups: ['builtin', 'external', 'internal', 'parent', 'sibling', 'index', 'object'],
-                    'newlines-between': 'always', // Enforce newlines between groups
-                    alphabetize: { order: 'asc', caseInsensitive: true }, // Alphabetical order
+                    'newlines-between': 'always',
+                    alphabetize: { order: 'asc', caseInsensitive: true },
+                    pathGroups: [
+                        { pattern: '_state/**', group: 'internal', position: 'before' },
+                        { pattern: 'globals/**', group: 'internal', position: 'before' },
+                        { pattern: 'pages/**', group: 'internal', position: 'before' },
+                        { pattern: 'utils/**', group: 'internal', position: 'before' },
+                    ],
+                    pathGroupsExcludedImportTypes: ['builtin'], // Ensures core modules stay first
                 },
             ],
         },

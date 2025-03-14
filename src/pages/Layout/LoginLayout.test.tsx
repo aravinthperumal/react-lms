@@ -1,7 +1,9 @@
 // LoginLayout.test.tsx
 import { screen } from '@testing-library/react';
-import { LoginLayout } from 'pages/layout/LoginLayout';
 import { Route, Routes } from 'react-router-dom';
+
+import { LoginLayout } from 'pages/layout/LoginLayout';
+
 import { renderWithProviders } from 'utils/test-utils';
 import { User } from 'utils/types';
 
@@ -16,7 +18,7 @@ describe('LoginLayout Component', () => {
             </Routes>,
             {
                 preloadedState: {
-                    user: { isUserLoggedIn: true, user: {} as User },
+                    user: { error: null, isLoading: false, isUserLoggedIn: true, user: {} as User },
                 },
             },
         );

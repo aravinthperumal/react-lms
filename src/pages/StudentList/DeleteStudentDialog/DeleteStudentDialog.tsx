@@ -1,8 +1,10 @@
-import { useDispatch } from '_state/useDispatch';
-import DeleteDialog from 'pages/components/deleteDialog/DeleteDialog';
-import { deleteStudent } from 'pages/studentList/_state/studentSlice';
 import React, { useCallback } from 'react';
 import { toast } from 'react-toastify';
+
+import { useDispatch } from '_state/useDispatch';
+
+import DeleteDialog from 'pages/components/deleteDialog/DeleteDialog';
+import { deleteStudent } from 'pages/studentList/_state/studentSlice';
 
 import { Student } from '../_state/types';
 

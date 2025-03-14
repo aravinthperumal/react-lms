@@ -1,6 +1,8 @@
 import { fireEvent, screen, waitFor } from '@testing-library/react';
-import { EDIT_MODE } from 'globals/constants';
 import { mockStudent } from 'test/__mocks__/studentListMock';
+
+import { EDIT_MODE } from 'globals/constants';
+
 import { renderWithProviders } from 'utils/test-utils';
 
 import { Student } from '../_state/types';

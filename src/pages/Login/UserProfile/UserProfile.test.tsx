@@ -1,4 +1,5 @@
 import { mockUser } from 'test/__mocks__/userMock';
+
 import { fireEvent, renderWithProviders, screen } from 'utils/test-utils';
 
 import { UserProfile } from './UserProfile';
